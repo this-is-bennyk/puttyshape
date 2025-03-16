@@ -28,32 +28,42 @@
 class_name PuttyRhombus3D
 extends PuttyShape3D
 
+## Creates a parallelogram whose sides are of equal length, or an equilateral quadrilateral.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The horizontal length of the rhombus.
 @export
 var horizontal_length := 1.0:
 	set(value):
 		horizontal_length = absf(value)
 		_update_parent()
 
+## The vertical length of the rhombus.
 @export
 var vertical_length := 1.0:
 	set(value):
 		vertical_length = absf(value)
 		_update_parent()
 
+## The height of the rhombus.
 @export
 var height := 0.2:
 	set(value):
 		height = absf(value)
 		_update_parent()
 
+## The rounding radius of the edges of the rhombus.
 @export
 var radius := 0.0:
 	set(value):
 		radius = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.RHOMBUS
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(horizontal_length, vertical_length, height, radius)

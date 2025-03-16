@@ -28,26 +28,35 @@
 class_name PuttyCappedTorus3D
 extends PuttyShape3D
 
+## Creates a torus (donut, ring) that is cut off when its circumference reaches a certain angle.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The angle to cut off the torus at.
 @export_range(-360.0, 360.0, 0.5, "degrees")
 var angle_degrees := 135.0:
 	set(value):
 		angle_degrees = value
 		_update_parent()
 
+## The radius of the torus.
 @export
 var radius := 1.0:
 	set(value):
 		radius = absf(value)
 		_update_parent()
 
+## The radius of the circumference of the torus.
 @export
 var thickness := 0.5:
 	set(value):
 		thickness = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.CAPPED_TORUS
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(deg_to_rad(angle_degrees), radius, thickness, 0.0)

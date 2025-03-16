@@ -28,20 +28,29 @@
 class_name PuttySolidAngle3D
 extends PuttyShape3D
 
-@export_range(-360.0, 360.0, 0.5, "degrees")
+## Creates the revolution of a 2D angle.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The angle from the tip of the solid angle, in square degrees.
+## (For the sake of simplicity, this can be imagined as regular degrees.)
+@export_range(-360.0, 360.0, 0.5, "suffix:sq. deg.")
 var angle_degrees := 45.0:
 	set(value):
 		angle_degrees = value
 		_update_parent()
 
+## The radius of the solid angle (i.e. the sphere it's intersecting).
 @export
 var radius := 1.0:
 	set(value):
 		radius = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.SOLID_ANGLE
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(deg_to_rad(angle_degrees), radius, 0.0, 0.0)

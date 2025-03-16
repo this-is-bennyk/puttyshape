@@ -28,14 +28,21 @@
 class_name PuttyPyramid3D
 extends PuttyShape3D
 
+## Creates a pyramid.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The height of the pyramid.
 @export
 var height := 1.0:
 	set(value):
 		height = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.PYRAMID
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(height, 0.0, 0.0, 0.0)

@@ -28,20 +28,28 @@
 class_name PuttyCutSphere3D
 extends PuttyShape3D
 
+## Creates a hemisphere with an adjustable cut plane relative to the size of the sphere.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The radius of the sphere.
 @export
 var radius := 1.0:
 	set(value):
 		radius = absf(value)
 		_update_parent()
 
+## The cut plane relative to the radius of the sphere.
 @export
 var cut_depth := 0.2:
 	set(value):
 		cut_depth = value
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.CUT_SPHERE
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(radius, cut_depth, 0.0, 0.0)

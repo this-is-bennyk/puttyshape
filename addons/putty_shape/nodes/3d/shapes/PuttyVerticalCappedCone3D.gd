@@ -28,26 +28,35 @@
 class_name PuttyVerticalCappedCone3D
 extends PuttyShape3D
 
+## Creates a flat cone with differently sized end caps and a given height.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The height of the cone.
 @export
 var height := 1.0:
 	set(value):
 		height = absf(value)
 		_update_parent()
 
+## The radius of the bottom of the cone.
 @export
 var bottom_radius := 1.0:
 	set(value):
 		bottom_radius = absf(value)
 		_update_parent()
 
+## The radius of the top of the cone.
 @export
 var top_radius := 0.5:
 	set(value):
 		top_radius = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.VERTICAL_CAPPED_CONE
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(height, bottom_radius, top_radius, 0.0)

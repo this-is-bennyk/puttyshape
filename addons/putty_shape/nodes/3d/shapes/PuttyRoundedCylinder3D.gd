@@ -28,26 +28,35 @@
 class_name PuttyRoundedCylinder3D
 extends PuttyShape3D
 
+## Creates a cylinder with rounded edges.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The radius of the cylinder.
 @export
 var cylinder_radius := 1.0:
 	set(value):
 		cylinder_radius = absf(value)
 		_update_parent()
 
+## The rounding radius of the edges of the cylinder.
 @export
 var rounding_radius := 0.0:
 	set(value):
 		rounding_radius = absf(value)
 		_update_parent()
 
+## The height of the cylinder.
 @export
 var height := 1.0:
 	set(value):
 		height = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.ROUNDED_CYLINDER
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(cylinder_radius, rounding_radius, height, 0.0)

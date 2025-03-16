@@ -29,20 +29,28 @@
 class_name PuttyTriangularPrism3D
 extends PuttyShape3D
 
+## Creates the extrusion of a triangle.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The radius of the triangle.
 @export
 var radius := 1.0:
 	set(value):
 		radius = absf(value)
 		_update_parent()
 
+## The length of the prism.
 @export
 var length := 1.0:
 	set(value):
 		length = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.TRIANGULAR_PRISM
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(radius, length, 0.0, 0.0)

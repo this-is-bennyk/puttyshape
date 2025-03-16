@@ -29,29 +29,39 @@
 class_name PuttyArbitraryCapsule3D
 extends PuttyShape3D
 
+## Creates a capsule with differently sized end caps between 2 arbitrary points.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The start point of the capsule in local space.
 @export
 var start := -Vector3.UP:
 	set(value):
 		start = value
 		_update_parent()
 
+## The end point of the capsule in local space.
 @export
 var end := Vector3.UP:
 	set(value):
 		end = value
 		_update_parent()
 
+## The radius of the capsule.
 @export
 var radius := 1.0:
 	set(value):
 		radius = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.ARBITRARY_CAPSULE
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(start.x, start.y, start.z, end.x)
 
+## See [method PuttyShape3D.get_second_arguments].
 func get_second_arguments() -> Vector4:
 	return Vector4(end.y, end.z, radius, 0.0)

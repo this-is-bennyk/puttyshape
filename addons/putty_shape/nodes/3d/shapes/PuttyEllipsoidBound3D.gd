@@ -28,14 +28,24 @@
 class_name PuttyEllipsoidBound3D
 extends PuttyShape3D
 
+## Creates a 3D ellipse.
+##
+## [b]NOTE[/b]: Unlike other [PuttyShape3D]s, [PuttyEllipsoidBound3D] is not an exact SDF, but a
+## bound one. It may produce poorer quality shapes.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The radii of the ellipsoid, with one radius per axis.
 @export_custom(PROPERTY_HINT_LINK, "")
 var radii := Vector3(1.0, 0.5, 2.0):
 	set(value):
 		radii = value.abs()
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.ELLIPSOID_BOUND
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(radii.x, radii.y, radii.z, 0.0)

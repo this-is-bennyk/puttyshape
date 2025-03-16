@@ -29,20 +29,28 @@
 class_name PuttyTorus3D
 extends PuttyShape3D
 
+## Creates a torus (donut, ring).
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The radius of the torus.
 @export
 var radius := 1.0:
 	set(value):
 		radius = absf(value)
 		_update_parent()
 
+## The radius of the circumference of the torus.
 @export
 var thickness := 0.5:
 	set(value):
 		thickness = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.TORUS
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(radius, thickness, 0.0, 0.0)

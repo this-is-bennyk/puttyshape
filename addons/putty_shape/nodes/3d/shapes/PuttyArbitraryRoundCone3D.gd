@@ -28,35 +28,46 @@
 class_name PuttyArbitraryRoundCone3D
 extends PuttyShape3D
 
+## Creates a round cone with differently sized end caps between 2 arbitrary points.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The start point of the round cone in local space.
 @export
 var start := -Vector3.UP:
 	set(value):
 		start = value
 		_update_parent()
 
+## The start point of the round cone in local space.
 @export
 var end := Vector3.UP:
 	set(value):
 		end = value
 		_update_parent()
 
+## The radius of the bottom of the round cone.
 @export
 var bottom_radius := 1.0:
 	set(value):
 		bottom_radius = absf(value)
 		_update_parent()
 
+## The radius of the top of the round cone.
 @export
 var top_radius := 0.5:
 	set(value):
 		top_radius = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.ARBITRARY_ROUND_CONE
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(start.x, start.y, start.z, end.x)
 
+## See [method PuttyShape3D.get_second_arguments].
 func get_second_arguments() -> Vector4:
 	return Vector4(end.y, end.z, bottom_radius, top_radius)

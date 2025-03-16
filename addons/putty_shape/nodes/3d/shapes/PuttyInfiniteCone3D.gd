@@ -25,17 +25,28 @@
 # Licensed under the MIT License.
 
 @tool
+@icon("res://addons/putty_shape/icons/putty_inf_cone_3D.svg")
 class_name PuttyInfiniteCone3D
 extends PuttyShape3D
 
+## Creates a cone that stretches forever.
+##
+## [b]NOTE[/b]: Infinite shapes, in 3D mesh generation, are best used to create subtractions
+## or intersections with shapes, as opposed to unions (they will always get cut off by the bounding box).
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The angle of the tip of the cone.
 @export_range(-360.0, 360.0, 0.5, "degrees")
 var angle_degrees := 45.0:
 	set(value):
 		angle_degrees = value
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.INFINITE_CONE
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(deg_to_rad(angle_degrees), 0.0, 0.0, 0.0)

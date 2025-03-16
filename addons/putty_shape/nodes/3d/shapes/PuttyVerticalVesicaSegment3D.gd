@@ -28,20 +28,29 @@
 class_name PuttyVerticalVesicaSegment3D
 extends PuttyShape3D
 
+## Creates a vesica segment (almond-like shape, intersection between two spheres) with differently
+## sized end caps and a given height.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The height of the vesica.
 @export
 var height := 1.0:
 	set(value):
 		height = absf(value)
 		_update_parent()
 
+## The width of the vesica.
 @export
 var weight := 1.0:
 	set(value):
 		weight = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.VERTICAL_VESICA_SEGMENT
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(height, weight, 0.0, 0.0)

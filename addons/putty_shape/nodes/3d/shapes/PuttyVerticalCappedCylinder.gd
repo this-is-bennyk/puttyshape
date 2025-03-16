@@ -29,20 +29,28 @@
 class_name PuttyVerticalCappedCylinder3D
 extends PuttyShape3D
 
+## Creates a cylinder with differently sized end caps and a given height.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The height of the cylinder.
 @export
 var height := 1.0:
 	set(value):
 		height = absf(value)
 		_update_parent()
 
+## The radius of the cylinder.
 @export
 var radius := 1.0:
 	set(value):
 		radius = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.VERTICAL_CAPPED_CYLINDER
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(height, radius, 0.0, 0.0)

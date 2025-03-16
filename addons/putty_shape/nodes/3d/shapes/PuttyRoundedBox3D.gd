@@ -28,20 +28,28 @@
 class_name PuttyRoundedBox3D
 extends PuttyShape3D
 
+## Creates a box with rounded edges and corners.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The size of the box.
 @export_custom(PROPERTY_HINT_LINK, "")
 var bounds := Vector3.ONE:
 	set(value):
 		bounds = value.abs()
 		_update_parent()
 
+## The rounding radius of the edges and corners of the box.
 @export
 var rounding_radius := 0.0:
 	set(value):
 		rounding_radius = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.ROUNDED_BOX
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(bounds.x, bounds.y, bounds.z, rounding_radius)

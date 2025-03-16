@@ -29,14 +29,21 @@
 class_name PuttyBox3D
 extends PuttyShape3D
 
+## Creates a box.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The size of the box.
 @export_custom(PROPERTY_HINT_LINK, "")
 var bounds := Vector3.ONE:
 	set(value):
 		bounds = value.abs()
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.BOX
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(bounds.x, bounds.y, bounds.z, 0.0)

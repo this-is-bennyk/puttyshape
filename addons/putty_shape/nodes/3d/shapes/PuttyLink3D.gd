@@ -28,26 +28,35 @@
 class_name PuttyLink3D
 extends PuttyShape3D
 
+## Creates a torus (donut, ring) with a horizontal length in the middle, like a chain link.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The length of the link.
 @export
 var length := 1.0:
 	set(value):
 		length = absf(value)
 		_update_parent()
 
+## The radius of the link.
 @export
 var radius := 1.0:
 	set(value):
 		radius = absf(value)
 		_update_parent()
 
+## The radius of the perimeter of the link.
 @export
 var thickness := 0.5:
 	set(value):
 		thickness = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.LINK
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(length, radius, thickness, 0.0)

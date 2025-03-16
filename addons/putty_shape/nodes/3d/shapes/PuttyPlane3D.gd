@@ -29,6 +29,15 @@
 class_name PuttyPlane3D
 extends PuttyShape3D
 
+## Creates a plane that stretches forever.
+##
+## [b]NOTE[/b]: Infinite shapes, in 3D mesh generation, are best used to create subtractions
+## or intersections with shapes, as opposed to unions (they will always get cut off by the bounding box).
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The vector representing the direction of the plane.
+## Normalized when passed to the parent [PuttyContainer3D].
 @export
 var normal := Vector3.UP:
 	set(value):
@@ -37,15 +46,18 @@ var normal := Vector3.UP:
 		normal = value
 		_update_parent()
 
+## The offset from the origin in the direction of the [member normal].
 @export
 var height := 0.5:
 	set(value):
 		height = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.PLANE
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	var normalized := normal.normalized()
 	return Vector4(normalized.x, normalized.y, normalized.z, height)

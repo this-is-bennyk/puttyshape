@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 @tool
+@icon("res://addons/putty_shape/icons/putty_shape_3D.svg")
 class_name PuttyShape3D
 extends Node3D
 

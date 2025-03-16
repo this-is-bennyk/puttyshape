@@ -28,20 +28,31 @@
 class_name PuttyInfiniteCylinder3D
 extends PuttyShape3D
 
+## Creates a cylinder that stretches forever.
+##
+## [b]NOTE[/b]: Infinite shapes, in 3D mesh generation, are best used to create subtractions
+## or intersections with shapes, as opposed to unions (they will always get cut off by the bounding box).
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The offset of the cylinder's position on the local xz-plane.
 @export
 var position_offset := Vector2.ZERO:
 	set(value):
 		position_offset = value.abs()
 		_update_parent()
 
+## The radius of the cylinder.
 @export
 var radius := 1.0:
 	set(value):
 		radius = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.INFINITE_CYLINDER
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(position_offset.x, position_offset.y, radius, 0.0)

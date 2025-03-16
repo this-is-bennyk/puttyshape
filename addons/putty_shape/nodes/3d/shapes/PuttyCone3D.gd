@@ -25,23 +25,32 @@
 # Licensed under the MIT License.
 
 @tool
+@icon("res://addons/putty_shape/icons/putty_cone_3D.svg")
 class_name PuttyCone3D
 extends PuttyShape3D
 
+## Creates a pointed cone.
+## 
+## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
+
+## The angle of the tip of the cone.
 @export_range(0.0, 90.0, 0.5, "degrees")
 var angle_degrees := 45.0:
 	set(value):
 		angle_degrees = value
 		_update_parent()
 
+## The height of the cone.
 @export
 var height := 1.0:
 	set(value):
 		height = absf(value)
 		_update_parent()
 
+## See [method PuttyShape3D.get_shape_type].
 func get_shape_type() -> int:
 	return Shapes.CONE
 
+## See [method PuttyShape3D.get_first_arguments].
 func get_first_arguments() -> Vector4:
 	return Vector4(deg_to_rad(angle_degrees), height, 0.0, 0.0)
