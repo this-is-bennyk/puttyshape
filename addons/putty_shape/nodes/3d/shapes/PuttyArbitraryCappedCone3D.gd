@@ -28,6 +28,8 @@
 class_name PuttyArbitraryCappedCone3D
 extends PuttyShape3D
 
+## Creates a cone with differently sized end caps in between 2 arbitrary points.
+
 @export
 var start := -Vector3.UP:
 	set(value):

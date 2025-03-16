@@ -25,7 +25,7 @@
 # Licensed under the MIT License.
 
 @tool
-@icon("res://putty_shape/icons/putty_box_3D.svg")
+@icon("res://addons/putty_shape/icons/putty_box_3D.svg")
 class_name PuttyBox3D
 extends PuttyShape3D
 

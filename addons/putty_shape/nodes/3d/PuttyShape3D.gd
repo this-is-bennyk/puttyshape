@@ -61,46 +61,74 @@ enum CombinationType
 	SUBTRACTION,
 	## Leaves the cross-section between this shape and any other shape it intersects with.
 	INTERSECTION,
-	## Same as union, but smoothly transitions to any other shape it intersects with instead of leaving a hard edge.
+	## Same as union, but smoothly transitions to any other shape it intersects with instead of leaving a hard edge.[br]
+	## Use [member combination_first_radius] to specify the smoothing radius.
 	SMOOTH_UNION,
-	## Same as subtraction, but smoothly transitions to any other shape it intersects with instead of leaving a hard edge. 
+	## Same as subtraction, but smoothly transitions to any other shape it intersects with instead of leaving a hard edge.[br]
+	## Use [member combination_first_radius] to specify the smoothing radius.
 	SMOOTH_SUBTRACTION,
-	## Same as intersection, but smoothly transitions to any other shape it intersects with instead of leaving a hard edge.
+	## Same as intersection, but smoothly transitions to any other shape it intersects with instead of leaving a hard edge.[br]
+	## Use [member combination_first_radius] to specify the smoothing radius.
 	SMOOTH_INTERSECTION,
-	## Same as union, but transitions to any other shape with a 45-degree chamfered edge.
+	## Same as union, but transitions to any other shape with a 45-degree chamfered edge.[br]
+	## Use [member combination_first_radius] to specify the chamfer radius.
 	CHAMFER_UNION,
-	## Same as subtraction, but transitions to any other shape with a 45-degree chamfered edge.
+	## Same as subtraction, but transitions to any other shape with a 45-degree chamfered edge.[br]
+	## Use [member combination_first_radius] to specify the chamfer radius.
 	CHAMFER_SUBTRACTION,
-	## Same as intersection, transitions to any other shape with a 45-degree chamfered edge.
+	## Same as intersection, transitions to any other shape with a 45-degree chamfered edge.[br]
+	## Use [member combination_first_radius] to specify the chamfer radius.
 	CHAMFER_INTERSECTION,
-	## Same as union, but transitions to any other shape with a quarter-circle.
+	## Same as union, but transitions to any other shape with a quarter-circle.[br]
+	## Use [member combination_first_radius] to specify the rounding radius.
 	ROUND_UNION,
-	## Same as subtraction, but transitions to any other shape with a quarter-circle.
+	## Same as subtraction, but transitions to any other shape with a quarter-circle.[br]
+	## Use [member combination_first_radius] to specify the rounding radius.
 	ROUND_SUBTRACTION,
-	## Same as intersection, but transitions to any other shape with a quarter-circle.
+	## Same as intersection, but transitions to any other shape with a quarter-circle.[br]
+	## Use [member combination_first_radius] to specify the rounding radius.
 	ROUND_INTERSECTION,
-	## Same as round union, but more Lipschitz-y at acute angles. (Wth does that mean??)
+	## Same as round union, but plays better with acute angles.[br]
+	## Use [member combination_first_radius] to specify the rounding radius.
 	SOFT_UNION,
 	## Removes all shapes this shape intersects with, including itself, and leaves a pipe
-	## around the intersections.
+	## around the intersections.[br]
+	## Use [member combination_first_radius] to specify the pipe's radius.
 	PIPE,
-	## Leaves a V-shaped intersection in any other shape this shape intersects with.
+	## Leaves a V-shaped intersection in any other shape this shape intersects with.[br]
+	## Use [member combination_first_radius] to specify the engraving radius.
 	ENGRAVE,
-	## Leaves a groove cutout in any other shape this shape intersects with.
+	## Leaves a groove cutout in any other shape this shape intersects with.[br]
+	## Use [member combination_first_radius] to specify the groove radius.[br]
+	## Use [member combination_second_radius] to specify the groove depth.
 	GROOVE,
-	## Adds a protrusion in any other shape this shape intersects with.
+	## Adds a protrusion in any other shape this shape intersects with.[br]
+	## Use [member combination_first_radius] to specify the tongue radius.[br]
+	## Use [member combination_second_radius] to specify the tongue depth.
 	TONGUE,
-	## Same as union, but transitions to any other shape with columns at a 45-degree angle.
+	## Same as union, but transitions to any other shape with columns at a 45-degree angle.[br]
+	## Use [member combination_first_radius] to specify the column's radius.[br]
+	## Use [member combination_steps] to specify the number of columns.
 	COLUMNS_UNION,
-	## Same as subtraction, but transitions to any other shape with columns at a 45-degree angle.
+	## Same as subtraction, but transitions to any other shape with columns at a 45-degree angle.[br]
+	## Use [member combination_first_radius] to specify the column's radius.[br]
+	## Use [member combination_steps] to specify the number of columns.
 	COLUMNS_SUBTRACTION,
-	## Same as intersection, but transitions to any other shape with columns at a 45-degree angle.
+	## Same as intersection, but transitions to any other shape with columns at a 45-degree angle.[br]
+	## Use [member combination_first_radius] to specify the column's radius.[br]
+	## Use [member combination_steps] to specify the number of columns.
 	COLUMNS_INTERSECTION,
-	## Same as union, but transitions to any other shape with stairs at a 45-degree angle.
+	## Same as union, but transitions to any other shape with stairs at a 45-degree angle.[br]
+	## Use [member combination_first_radius] to specify the stair's size.[br]
+	## Use [member combination_steps] to specify the number of stairs.
 	STAIRS_UNION,
-	## Same as subtraction, but transitions to any other shape with stairs at a 45-degree angle.
+	## Same as subtraction, but transitions to any other shape with stairs at a 45-degree angle.[br]
+	## Use [member combination_first_radius] to specify the stair's size.[br]
+	## Use [member combination_steps] to specify the number of stairs.
 	STAIRS_SUBTRACTION,
-	## Same as intersection, but transitions to any other shape with stairs at a 45-degree angle.
+	## Same as intersection, but transitions to any other shape with stairs at a 45-degree angle.[br]
+	## Use [member combination_first_radius] to specify the stair's size.[br]
+	## Use [member combination_steps] to specify the number of stairs.
 	STAIRS_INTERSECTION,
 }
 
@@ -140,6 +168,7 @@ enum Shapes
 	PYRAMID,
 }
 
+## Sends a request to the parent [PuttyContainer3D] to update the mesh.
 @export_tool_button("Update")
 var update_shape := _update_parent
 
@@ -165,18 +194,21 @@ var combination_type := CombinationType.UNION:
 		combination_type = value
 		_update_parent()
 
+## One of the radii parameters for certain combination types.
 @export
 var combination_first_radius := 0.0:
 	set(value):
 		combination_first_radius = absf(value)
 		_update_parent()
 
+## One of the radii parameters for certain combination types.
 @export
 var combination_second_radius := 0.0:
 	set(value):
 		combination_second_radius = absf(value)
 		_update_parent()
 
+## The number of steps for certain combination types.
 @export
 var combination_steps := 1:
 	set(value):

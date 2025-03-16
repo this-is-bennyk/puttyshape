@@ -25,7 +25,7 @@
 # Licensed under the MIT License.
 
 @tool
-@icon("res://putty_shape/icons/putty_cylinder_3D.svg")
+@icon("res://addons/putty_shape/icons/putty_cylinder_3D.svg")
 class_name PuttyVerticalCappedCylinder3D
 extends PuttyShape3D
 

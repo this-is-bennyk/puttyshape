@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 @tool
-@icon("res://putty_shape/icons/putty_container_3D.svg")
+@icon("res://addons/putty_shape/icons/putty_container_3D.svg")
 class_name PuttyContainer3D
 extends MeshInstance3D
 
@@ -40,12 +40,18 @@ extends MeshInstance3D
 ## in a separate program) directly inside Godot. Large Putty shapes will
 ## slow down the editor. There are no guarantees that this node will work
 ## as expected in release mode on certain devices.
+## 
+## @tutorial(Mikola Lysenko's JS implementation of naive surface nets): https://github.com/mikolalysenko/mikolalysenko.github.com/blob/master/Isosurface/js/surfacenets.js
 
 const PUTTY_SAMPLER_3D := preload("res://addons/putty_shape/datatypes/3d/PuttySampler3D.glsl")
 
+## Sends a request to the other thread to update the mesh.
 @export_tool_button("Update")
 var update_mesh := submit_request
 
+## The voxel area to sample points in.[br]
+## [b]NOTE[/b]: Increasing this beyond the default may incur slowdowns that
+## bring the editor to a crawl.
 @export
 var sample_space := AABB(Vector3.ONE * -20.0, Vector3.ONE * 40.0)
 
@@ -87,6 +93,7 @@ func _ready() -> void:
 	
 	child_order_changed.connect(submit_request)
 
+## Sends a request to the other thread to update the mesh.
 func submit_request() -> void:
 	_last_request = Time.get_ticks_usec()
 
@@ -367,9 +374,9 @@ func _add_mesh() -> void:
 	
 	mesh = _resulting_mesh
 
-## From Mikola Lysenko's JS implementation of surface nets
-## https://github.com/mikolalysenko/mikolalysenko.github.com/blob/master/Isosurface/js/surfacenets.js
-## Licensed under the MIT License.
+# From Mikola Lysenko's JS implementation of surface nets
+# https://github.com/mikolalysenko/mikolalysenko.github.com/blob/master/Isosurface/js/surfacenets.js
+# Licensed under the MIT License.
 func _compute_mesh(request: int) -> void:
 	var buffer := PackedInt64Array()
 	buffer.resize(4096)
