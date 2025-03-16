@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://bwextb0uqascc"
+path="res://.godot/imported/PuttyComputer3D.glsl-cf5c5b94590911385239d16975eb15e0.res"
+
+[deps]
+
+source_file="res://addons/putty_shape/datatypes/3d/PuttyComputer3D.glsl"
+dest_files=["res://.godot/imported/PuttyComputer3D.glsl-cf5c5b94590911385239d16975eb15e0.res"]
+
+[params]
+

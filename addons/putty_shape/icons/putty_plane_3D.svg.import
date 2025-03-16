@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dov4w7adelbo7"
-path="res://.godot/imported/putty_triangular_prism_3D.svg-cc2f6b65e2ba77f30bba45a53556247e.ctex"
+uid="uid://s5urc838qb0d"
+path="res://.godot/imported/putty_plane_3D.svg-76f0fc30aaadccd100e91318bd63f4f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://putty_shape/icons/putty_triangular_prism_3D.svg"
-dest_files=["res://.godot/imported/putty_triangular_prism_3D.svg-cc2f6b65e2ba77f30bba45a53556247e.ctex"]
+source_file="res://addons/putty_shape/icons/putty_plane_3D.svg"
+dest_files=["res://.godot/imported/putty_plane_3D.svg-76f0fc30aaadccd100e91318bd63f4f1.ctex"]
 
 [params]
 

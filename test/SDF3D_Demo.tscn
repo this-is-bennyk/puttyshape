@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=4 uid="uid://d0ao3fxxr5k7k"]
 
 [ext_resource type="Script" uid="uid://b518lfllj7jn4" path="res://test/sdf_3d_demo.gd" id="1_gydwd"]
-[ext_resource type="Script" uid="uid://bjk3v8rtjj58s" path="res://putty_shape/nodes/3d/PuttyContainer3D.gd" id="2_abx5f"]
-[ext_resource type="Script" uid="uid://bkq2pi6lntsyx" path="res://putty_shape/nodes/3d/shapes/PuttyCutSphere3D.gd" id="3_her1m"]
-[ext_resource type="Script" uid="uid://m6nxcnjk443j" path="res://putty_shape/nodes/3d/shapes/PuttyBox3D.gd" id="4_u6nup"]
-[ext_resource type="Script" uid="uid://na14um31gb4y" path="res://putty_shape/nodes/3d/shapes/PuttyVerticalCappedCylinder.gd" id="4_vocmt"]
-[ext_resource type="Script" uid="uid://xurewamhh8m0" path="res://putty_shape/nodes/3d/shapes/PuttyArbitraryCappedCylinder3D.gd" id="5_nt8ya"]
+[ext_resource type="Script" uid="uid://bjk3v8rtjj58s" path="res://addons/putty_shape/nodes/3d/PuttyContainer3D.gd" id="2_abx5f"]
+[ext_resource type="Script" uid="uid://bkq2pi6lntsyx" path="res://addons/putty_shape/nodes/3d/shapes/PuttyCutSphere3D.gd" id="3_her1m"]
+[ext_resource type="Script" uid="uid://m6nxcnjk443j" path="res://addons/putty_shape/nodes/3d/shapes/PuttyBox3D.gd" id="4_u6nup"]
+[ext_resource type="Script" uid="uid://na14um31gb4y" path="res://addons/putty_shape/nodes/3d/shapes/PuttyVerticalCappedCylinder.gd" id="4_vocmt"]
+[ext_resource type="Script" uid="uid://xurewamhh8m0" path="res://addons/putty_shape/nodes/3d/shapes/PuttyArbitraryCappedCylinder3D.gd" id="5_nt8ya"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_d6uuv"]
 size = Vector3(2000, 0.5, 2000)

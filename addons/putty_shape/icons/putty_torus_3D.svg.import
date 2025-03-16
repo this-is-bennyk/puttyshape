@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh5vl8k18qaxm"
-path="res://.godot/imported/putty_sphere_3D.svg-9dbca3eceb78ee44702cbe5547287293.ctex"
+uid="uid://btd6xy7utyeyt"
+path="res://.godot/imported/putty_torus_3D.svg-11f7f083ed75cc75f1dda70c9de48bd2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://putty_shape/icons/putty_sphere_3D.svg"
-dest_files=["res://.godot/imported/putty_sphere_3D.svg-9dbca3eceb78ee44702cbe5547287293.ctex"]
+source_file="res://addons/putty_shape/icons/putty_torus_3D.svg"
+dest_files=["res://.godot/imported/putty_torus_3D.svg-11f7f083ed75cc75f1dda70c9de48bd2.ctex"]
 
 [params]
 

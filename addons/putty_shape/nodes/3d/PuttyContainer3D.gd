@@ -19,7 +19,7 @@ extends MeshInstance3D
 ## slow down the editor. There are no guarantees that this node will work
 ## as expected in release mode on certain devices.
 
-const PUTTY_SAMPLER_3D := preload("res://putty_shape/datatypes/3d/PuttySampler3D.glsl")
+const PUTTY_SAMPLER_3D := preload("res://addons/putty_shape/datatypes/3d/PuttySampler3D.glsl")
 
 @export_tool_button("Update")
 var update_mesh := submit_request

@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=4 uid="uid://dfu5160s5kre2"]
 
-[ext_resource type="Script" uid="uid://bjk3v8rtjj58s" path="res://putty_shape/nodes/3d/PuttyContainer3D.gd" id="1_lrwm0"]
-[ext_resource type="Script" uid="uid://bs43fp3b6w5ee" path="res://putty_shape/nodes/3d/shapes/PuttySphere3D.gd" id="2_b1rjf"]
-[ext_resource type="Script" uid="uid://m6nxcnjk443j" path="res://putty_shape/nodes/3d/shapes/PuttyBox3D.gd" id="3_y8llj"]
+[ext_resource type="Script" uid="uid://bjk3v8rtjj58s" path="res://addons/putty_shape/nodes/3d/PuttyContainer3D.gd" id="1_lrwm0"]
+[ext_resource type="Script" uid="uid://bs43fp3b6w5ee" path="res://addons/putty_shape/nodes/3d/shapes/PuttySphere3D.gd" id="2_b1rjf"]
+[ext_resource type="Script" uid="uid://m6nxcnjk443j" path="res://addons/putty_shape/nodes/3d/shapes/PuttyBox3D.gd" id="3_y8llj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lrwm0"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
