@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfsvt0h2v33rj"]
+
+[ext_resource type="ArrayMesh" uid="uid://dh3hyxjhgauhx" path="res://test/little_guy.tres" id="1_r52yy"]
+[ext_resource type="Script" uid="uid://bjk3v8rtjj58s" path="res://putty_shape/nodes/3d/PuttyContainer3D.gd" id="2_dser2"]
+[ext_resource type="Script" uid="uid://bs43fp3b6w5ee" path="res://putty_shape/nodes/3d/shapes/PuttySphere3D.gd" id="3_cntr7"]
+[ext_resource type="Script" uid="uid://coajdmn3k5ny1" path="res://putty_shape/nodes/3d/shapes/PuttyArbitraryCappedCone3D.gd" id="4_546fv"]
+[ext_resource type="Script" uid="uid://na14um31gb4y" path="res://putty_shape/nodes/3d/shapes/PuttyVerticalCappedCylinder.gd" id="5_15cin"]
+[ext_resource type="Script" uid="uid://bkq2pi6lntsyx" path="res://putty_shape/nodes/3d/shapes/PuttyCutSphere3D.gd" id="6_3n7ly"]
+[ext_resource type="Script" uid="uid://dc8i7csb4dber" path="res://putty_shape/nodes/3d/shapes/PuttyVerticalRoundCone3D.gd" id="7_5st2g"]
+
+[node name="LittleGuy" type="Node3D"]
+
+[node name="SDFContainer3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_r52yy")
+script = ExtResource("2_dser2")
+metadata/_custom_type_script = "uid://bjk3v8rtjj58s"
+
+[node name="SDFSphere3D" type="Node3D" parent="SDFContainer3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.08218, 0)
+script = ExtResource("3_cntr7")
+radius = 5.0
+metadata/_custom_type_script = "uid://bs43fp3b6w5ee"
+
+[node name="SDFArbitraryCappedCone3D" type="Node3D" parent="SDFContainer3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.65391, 0)
+script = ExtResource("4_546fv")
+start = Vector3(0, -5, 0)
+end = Vector3(0, 5, 0)
+bottom_radius = 5.0
+top_radius = 2.5
+metadata/_custom_type_script = "uid://coajdmn3k5ny1"
+
+[node name="SDFVerticalCappedCylinder3D" type="Node3D" parent="SDFContainer3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.10251, -1.38935)
+script = ExtResource("5_15cin")
+height = 5.0
+metadata/_custom_type_script = "uid://na14um31gb4y"
+
+[node name="SDFVerticalCappedCylinder3D2" type="Node3D" parent="SDFContainer3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.10251, 1.80284)
+script = ExtResource("5_15cin")
+height = 5.0
+metadata/_custom_type_script = "uid://na14um31gb4y"
+
+[node name="SDFCutSphere3D" type="Node3D" parent="SDFContainer3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.55, -1.90552, -15.5314, -2.11993)
+script = ExtResource("6_3n7ly")
+radius = 4.0
+cut_depth = 1.0
+metadata/_custom_type_script = "uid://bkq2pi6lntsyx"
+
+[node name="SDFCutSphere3D2" type="Node3D" parent="SDFContainer3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.55, -1.90552, -15.5314, 2.2573)
+script = ExtResource("6_3n7ly")
+radius = 4.0
+cut_depth = 1.0
+metadata/_custom_type_script = "uid://bkq2pi6lntsyx"
+
+[node name="SDFVerticalRoundCone3D" type="Node3D" parent="SDFContainer3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.44398, -11.4251)
+script = ExtResource("7_5st2g")
+height = 10.0
+bottom_radius = 2.0
+top_radius = 1.0
+metadata/_custom_type_script = "uid://dc8i7csb4dber"
+
+[node name="SDFVerticalRoundCone3D2" type="Node3D" parent="SDFContainer3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.44398, 11.4085)
+script = ExtResource("7_5st2g")
+height = 10.0
+bottom_radius = 2.0
+top_radius = 1.0
+metadata/_custom_type_script = "uid://dc8i7csb4dber"
