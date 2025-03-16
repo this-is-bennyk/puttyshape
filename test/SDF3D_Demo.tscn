@@ -45,25 +45,25 @@ script = ExtResource("1_gydwd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -164.351, -18.364, 162.643)
 mesh = SubResource("BoxMesh_d6uuv")
 
-[node name="SDFContainer3D" type="MeshInstance3D" parent="."]
+[node name="PuttyContainer3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_her1m")
 mesh = SubResource("ArrayMesh_vocmt")
 script = ExtResource("2_abx5f")
 metadata/_custom_type_script = "uid://bjk3v8rtjj58s"
 
-[node name="SDFCutSphere3D" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyCutSphere3D" type="Node3D" parent="PuttyContainer3D"]
 script = ExtResource("3_her1m")
 radius = 15.0
 metadata/_custom_type_script = "uid://bkq2pi6lntsyx"
 
-[node name="SDFVerticalCappedCylinder3D" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyVerticalCappedCylinder3D" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.41753, 0)
 script = ExtResource("4_vocmt")
 height = 3.0
 radius = 17.0
 metadata/_custom_type_script = "uid://na14um31gb4y"
 
-[node name="SDFArbitraryCappedCylinder3D" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyArbitraryCappedCylinder3D" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6903, 7.24242, 3.68736)
 script = ExtResource("5_nt8ya")
 start = Vector3(3, 0, 0)
@@ -72,7 +72,7 @@ radius = 2.0
 combination_type = 2
 metadata/_custom_type_script = "uid://xurewamhh8m0"
 
-[node name="SDFArbitraryCappedCylinder3D2" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyArbitraryCappedCylinder3D2" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.69, 7.24251, -3.687)
 script = ExtResource("5_nt8ya")
 start = Vector3(3, 0, 0)
@@ -81,61 +81,61 @@ radius = 2.0
 combination_type = 2
 metadata/_custom_type_script = "uid://xurewamhh8m0"
 
-[node name="SDFBox3D2" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyBox3D2" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(0.990686, 0, 0.136165, 0, 1, 0, -0.136165, 0, 0.990686, 15.4592, 1.55542, -3.65123)
 script = ExtResource("4_u6nup")
 bounds = Vector3(1, 2, 2)
 metadata/_custom_type_script = "uid://m6nxcnjk443j"
 
-[node name="SDFBox3D3" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyBox3D3" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(0.868043, 0, 0.496489, 0, 1, 0, -0.496489, 0, 0.868043, 12.9819, 1.55542, -9.19267)
 script = ExtResource("4_u6nup")
 bounds = Vector3(1, 2, 2)
 metadata/_custom_type_script = "uid://m6nxcnjk443j"
 
-[node name="SDFBox3D4" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyBox3D4" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(0.990748, 0, -0.135716, 0, 1, 0, 0.135716, 0, 0.990748, 15.459, 1.55497, 3.651)
 script = ExtResource("4_u6nup")
 bounds = Vector3(1, 2, 2)
 metadata/_custom_type_script = "uid://m6nxcnjk443j"
 
-[node name="SDFBox3D5" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyBox3D5" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(0.867765, 0, -0.496974, 0, 1, 0, 0.496974, 0, 0.867765, 12.982, 1.55497, 9.193)
 script = ExtResource("4_u6nup")
 bounds = Vector3(1, 2, 2)
 metadata/_custom_type_script = "uid://m6nxcnjk443j"
 
-[node name="SDFBox3D6" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyBox3D6" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93175, 15.549, 0)
 script = ExtResource("4_u6nup")
 bounds = Vector3(3, 3, 3)
 metadata/_custom_type_script = "uid://m6nxcnjk443j"
 
-[node name="SDFBox3D7" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyBox3D7" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(1, 0, 0, 0, 0.833645, 0.552301, 0, -0.552301, 0.833645, 2.93175, 13.653, -8.73944)
 script = ExtResource("4_u6nup")
 bounds = Vector3(3, 3, 3)
 metadata/_custom_type_script = "uid://m6nxcnjk443j"
 
-[node name="SDFBox3D8" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyBox3D8" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(1, 0, 0, 0, 0.597303, 0.802015, 0, -0.802015, 0.597303, 2.93175, 6.80176, -15.0057)
 script = ExtResource("4_u6nup")
 bounds = Vector3(3, 3, 3)
 metadata/_custom_type_script = "uid://m6nxcnjk443j"
 
-[node name="SDFBox3D9" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyBox3D9" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(1, 0, 0, 0, 0.833886, -0.551937, 0, 0.551937, 0.833886, 2.932, 13.653, 8.739)
 script = ExtResource("4_u6nup")
 bounds = Vector3(3, 3, 3)
 metadata/_custom_type_script = "uid://m6nxcnjk443j"
 
-[node name="SDFBox3D10" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyBox3D10" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(1, 0, 0, 0, 0.597625, -0.801776, 0, 0.801776, 0.597625, 2.932, 6.802, 15.006)
 script = ExtResource("4_u6nup")
 bounds = Vector3(3, 3, 3)
 metadata/_custom_type_script = "uid://m6nxcnjk443j"
 
-[node name="SDFBox3D" type="Node3D" parent="SDFContainer3D"]
+[node name="PuttyBox3D" type="Node3D" parent="PuttyContainer3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
 script = ExtResource("4_u6nup")
 bounds = Vector3(10, 18.925, 18.21)
