@@ -18,10 +18,10 @@
 
 ## About
 
-### What is Putty Shape?
-The Putty Shape plugin is the culmination of multiple sources into one plugin that allows for complex mesh generation by using primitive shapes and mathematical operations.
+### What is PuttyShape?
+The PuttyShape plugin is the culmination of multiple sources into one plugin that allows for complex mesh generation by using primitive shapes and mathematical operations.
 
-### Why is Putty Shape?
+### Why is PuttyShape?
 I watched [this video by Carter Semrad](https://www.youtube.com/watch?v=QhvzmskRiCk) and became hyperfixated on using SDF functions to create cool visuals. I was also inspired by previous SDF plugins by [Zylann](https://github.com/Zylann/godot_sdf_blender), [Digvijaysinh](https://godotengine.org/asset-library/asset/2503) [Gohil](https://godotengine.org/asset-library/asset/2691), and [kubaxius](https://godotengine.org/asset-library/asset/2691). About 1 and a half weeks later, the Saturday before GDC 2025, I completed the initial version of this project.
 
 ### Features
@@ -33,7 +33,7 @@ I watched [this video by Carter Semrad](https://www.youtube.com/watch?v=QhvzmskR
 ![image_2025-03-16_011946979](https://github.com/user-attachments/assets/6358c1c7-216e-4be6-bd17-9b4a282b25b7)
 
 ## Version
-Putty Shape requires **at least Godot 4.4**.
+PuttyShape requires **at least Godot 4.4**.
 
 ## Installation
 Download the plugin from the latest release and extract the addons/putty_shape folder into your Godot project.
