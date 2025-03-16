@@ -22,7 +22,7 @@
 The Putty Shape plugin is the culmination of multiple sources into one plugin that allows for complex mesh generation by using primitive shapes and mathematical operations.
 
 ### Why is Putty Shape?
-I watched [this video by Carter Semrad](https://www.youtube.com/watch?v=QhvzmskRiCk) and became hyperfixated on using SDF functions to create cool visuals. I was also inspired by previous SDF plugins by [Zylann](https://github.com/Zylann/godot_sdf_blender), [Digvijaysinh](https://godotengine.org/asset-library/asset/2503) [Gohil](https://godotengine.org/asset-library/asset/2691), and [kubaxius](https://godotengine.org/asset-library/asset/2691). About 1 and a half weeks later, the Saturday before GDC 2025, I made this project.
+I watched [this video by Carter Semrad](https://www.youtube.com/watch?v=QhvzmskRiCk) and became hyperfixated on using SDF functions to create cool visuals. I was also inspired by previous SDF plugins by [Zylann](https://github.com/Zylann/godot_sdf_blender), [Digvijaysinh](https://godotengine.org/asset-library/asset/2503) [Gohil](https://godotengine.org/asset-library/asset/2691), and [kubaxius](https://godotengine.org/asset-library/asset/2691). About 1 and a half weeks later, the Saturday before GDC 2025, I completed the initial version of this project.
 
 ### Features
 - 3D Mesh Generation
