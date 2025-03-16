@@ -30,6 +30,8 @@ I watched [this video by Carter Semrad](https://www.youtube.com/watch?v=QhvzmskR
   - Over 30 shapes to use and over 20 operations to perform on them to create complex models
   - Save your creations from the mesh that's outputted to the PuttyContainer3D's mesh property as a model you can use in-game as-is or modify by exporting it from Godot
 
+![image_2025-03-16_011946979](https://github.com/user-attachments/assets/6358c1c7-216e-4be6-bd17-9b4a282b25b7)
+
 ## Version
 Putty Shape requires **at least Godot 4.4**.
 
