@@ -42,4 +42,4 @@ Download the plugin from the latest release and extract the addons/putty_shape f
 This project is licensed under the [MIT License](https://github.com/this-is-bennyk/playnub/blob/main/LICENSE).  
 This project utilizes Inigo Quilez's [SDF tutorials](https://iquilezles.org/articles/). Certain portions are licensed under the [MIT License](https://www.shadertoy.com/view/Xds3zN).  
 This project utilizes the surface nets algorithm based on Mikola Lysenko's [JavaScript implementation](https://github.com/mikolalysenko/mikolalysenko.github.com/blob/master/Isosurface/js/surfacenets.js). It is licensed under the [MIT License](https://github.com/mikolalysenko/mikolalysenko.github.com/blob/master/Isosurface/js/surfacenets.js).  
-This project utilize portions of the Mercury Demogroup's [hg_sdf file](https://mercury.sexy/hg_sdf/). It is licensed under the [MIT License](https://mercury.sexy/hg_sdf/).
+This project utilizes portions of the Mercury Demogroup's [hg_sdf file](https://mercury.sexy/hg_sdf/). It is licensed under the [MIT License](https://mercury.sexy/hg_sdf/).
