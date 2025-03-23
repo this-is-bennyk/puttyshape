@@ -25,7 +25,7 @@
 class_name PuttyShape3D
 extends Node3D
 
-## Base class for providing information to a parent [PuttyContainer3D] about what to draw.
+## Base class for providing information to a parent [PuttyMesher3D] or [PuttyRenderer3D] about what to draw.
 ## 
 ## The [PuttyShape3D] is a node that contains information for a particular kind of shape
 ## to render using a [b]signed distance field[/b] ([b]SDF[/b]) function. It does not
@@ -51,7 +51,7 @@ extends Node3D
 	#FINITE_MIRRORED_DOMAIN_REPETITION,
 #}
 
-## How to combine the [PuttyShape3D] into its parent [PuttyContainer3D].
+## How to combine the [PuttyShape3D] into its parent [PuttyMesher3D] or [PuttyRenderer3D].
 enum CombinationType
 {
 	## Inserts the shape without modification.
@@ -169,15 +169,15 @@ enum Shapes
 	PYRAMID,
 }
 
-## Sends a request to the parent [PuttyContainer3D] to update the mesh.
+## Sends a request to the parent [PuttyMesher3D] or [PuttyRenderer3D] to update the mesh.
 @export_tool_button("Update")
 var update_shape := _update_parent
 
-## Tells the parent [PuttyContainer3D] how to generate this shape.
+## Tells the parent [PuttyMesher3D] or [PuttyRenderer3D] how to generate this shape.
 #@export
 #var generation := GenerationType.DEFAULT
 
-## Tells the parent [PuttyContainer3D] how to modify this shape.
+## Tells the parent [PuttyMesher3D] or [PuttyRenderer3D] how to modify this shape.
 ## An empty stack will default to leaving the shape at the local origin, orientation,
 ## and scale of this node without modifications.
 @export
@@ -188,7 +188,7 @@ var modifiers: Array[PuttyModifier3D] = []:
 
 @export_group("Combination", "combination_")
 
-## Tells the parent [PuttyContainer3D] how to add this shape into the scene.
+## Tells the parent [PuttyMesher3D] or [PuttyRenderer3D] how to add this shape into the scene.
 @export
 var combination_type := CombinationType.UNION:
 	set(value):
@@ -222,8 +222,11 @@ func _ready() -> void:
 func _get_configuration_warnings() -> PackedStringArray:
 	var result := PackedStringArray()
 	
-	if get_parent() is not PuttyContainer3D:
-		result.push_back("Parent must be an PuttyContainer3D. This node will do nothing.")
+	var parent_isnt_container3D := get_parent() is not PuttyMesher3D
+	var parent_isnt_container_psuedo_3D := get_parent() is not PuttyRenderer3D
+	
+	if parent_isnt_container3D and parent_isnt_container_psuedo_3D:
+		result.push_back("Parent must be an PuttyMesher3D or a PuttyRenderer3D. This node will do nothing.")
 	
 	return result
 
@@ -249,8 +252,9 @@ func _update_parent() -> void:
 	if not is_inside_tree():
 		return
 	
-	if get_parent() is not PuttyContainer3D:
-		printerr("Parent must be an PuttyContainer3D. This node will do nothing.")
-		return
-	
-	(get_parent() as PuttyContainer3D).submit_request()
+	if get_parent() is PuttyMesher3D:
+		(get_parent() as PuttyMesher3D).submit_request()
+	elif get_parent() is PuttyRenderer3D:
+		(get_parent() as PuttyRenderer3D).refresh_shape(self)
+	else:
+		printerr("Parent must be an PuttyMesher3D or a PuttyRenderer3D. This node will do nothing.")

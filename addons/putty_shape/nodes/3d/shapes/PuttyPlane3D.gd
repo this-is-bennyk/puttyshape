@@ -37,7 +37,7 @@ extends PuttyShape3D
 ## @tutorial(From Inigo Quilez's SDF functions): https://iquilezles.org/articles/distfunctions/
 
 ## The vector representing the direction of the plane.
-## Normalized when passed to the parent [PuttyContainer3D].
+## Normalized when passed to the parent [PuttyMesher3D].
 @export
 var normal := Vector3.UP:
 	set(value):

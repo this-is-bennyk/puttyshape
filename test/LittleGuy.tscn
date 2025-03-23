@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfsvt0h2v33rj"]
 
 [ext_resource type="ArrayMesh" uid="uid://dh3hyxjhgauhx" path="res://test/little_guy.tres" id="1_r52yy"]
-[ext_resource type="Script" uid="uid://bjk3v8rtjj58s" path="res://addons/putty_shape/nodes/3d/PuttyContainer3D.gd" id="2_dser2"]
+[ext_resource type="Script" uid="uid://bjk3v8rtjj58s" path="res://addons/putty_shape/nodes/3d/PuttyMesher3D.gd" id="2_dser2"]
 [ext_resource type="Script" uid="uid://bs43fp3b6w5ee" path="res://addons/putty_shape/nodes/3d/shapes/PuttySphere3D.gd" id="3_cntr7"]
 [ext_resource type="Script" uid="uid://coajdmn3k5ny1" path="res://addons/putty_shape/nodes/3d/shapes/PuttyArbitraryCappedCone3D.gd" id="4_546fv"]
 [ext_resource type="Script" uid="uid://na14um31gb4y" path="res://addons/putty_shape/nodes/3d/shapes/PuttyVerticalCappedCylinder.gd" id="5_15cin"]

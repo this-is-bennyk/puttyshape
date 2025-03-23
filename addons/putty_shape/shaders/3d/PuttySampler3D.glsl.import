@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://chn8u5rt04w20"
+path="res://.godot/imported/PuttySampler3D.glsl-58a1634ac8a15dda1f246070e635c1fc.res"
+
+[deps]
+
+source_file="res://addons/putty_shape/shaders/3d/PuttySampler3D.glsl"
+dest_files=["res://.godot/imported/PuttySampler3D.glsl-58a1634ac8a15dda1f246070e635c1fc.res"]
+
+[params]
+

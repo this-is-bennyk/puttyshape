@@ -24,101 +24,101 @@
 // https://iquilezles.org/articles/distfunctions/
 // Licensed under the MIT License.
 
-const int SDF3D_SWIZZLE_YX = 0;
-const int SDF3D_SWIZZLE_ZX =  SDF3D_SWIZZLE_YX + 1;
-const int SDF3D_SWIZZLE_ZY = SDF3D_SWIZZLE_ZX + 1;
-const int SDF3D_SWIZZLE_XZY = SDF3D_SWIZZLE_ZY + 1;
-const int SDF3D_SWIZZLE_YXZ = SDF3D_SWIZZLE_XZY + 1;
-const int SDF3D_SWIZZLE_YZX = SDF3D_SWIZZLE_YXZ + 1;
-const int SDF3D_SWIZZLE_ZXY = SDF3D_SWIZZLE_YZX + 1;
-const int SDF3D_SWIZZLE_ZYX = SDF3D_SWIZZLE_ZXY + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_X = SDF3D_SWIZZLE_ZYX + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_Y = SDF3D_SWIZZLE_SYMMETRICAL_X + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_Z = SDF3D_SWIZZLE_SYMMETRICAL_Y + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_XY = SDF3D_SWIZZLE_SYMMETRICAL_Z + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_YX = SDF3D_SWIZZLE_SYMMETRICAL_XY + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_XZ = SDF3D_SWIZZLE_SYMMETRICAL_YX + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_ZX = SDF3D_SWIZZLE_SYMMETRICAL_XZ + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_YZ = SDF3D_SWIZZLE_SYMMETRICAL_ZX + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_ZY = SDF3D_SWIZZLE_SYMMETRICAL_YZ + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_XYZ = SDF3D_SWIZZLE_SYMMETRICAL_ZY + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_XZY = SDF3D_SWIZZLE_SYMMETRICAL_XYZ + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_YXZ = SDF3D_SWIZZLE_SYMMETRICAL_XZY + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_YZX = SDF3D_SWIZZLE_SYMMETRICAL_YXZ + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_ZXY = SDF3D_SWIZZLE_SYMMETRICAL_YZX + 1;
-const int SDF3D_SWIZZLE_SYMMETRICAL_ZYX = SDF3D_SWIZZLE_SYMMETRICAL_ZXY + 1;
+const int PUTTY3D_SWIZZLE_YX = 0;
+const int PUTTY3D_SWIZZLE_ZX =  PUTTY3D_SWIZZLE_YX + 1;
+const int PUTTY3D_SWIZZLE_ZY = PUTTY3D_SWIZZLE_ZX + 1;
+const int PUTTY3D_SWIZZLE_XZY = PUTTY3D_SWIZZLE_ZY + 1;
+const int PUTTY3D_SWIZZLE_YXZ = PUTTY3D_SWIZZLE_XZY + 1;
+const int PUTTY3D_SWIZZLE_YZX = PUTTY3D_SWIZZLE_YXZ + 1;
+const int PUTTY3D_SWIZZLE_ZXY = PUTTY3D_SWIZZLE_YZX + 1;
+const int PUTTY3D_SWIZZLE_ZYX = PUTTY3D_SWIZZLE_ZXY + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_X = PUTTY3D_SWIZZLE_ZYX + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_Y = PUTTY3D_SWIZZLE_SYMMETRICAL_X + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_Z = PUTTY3D_SWIZZLE_SYMMETRICAL_Y + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_XY = PUTTY3D_SWIZZLE_SYMMETRICAL_Z + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_YX = PUTTY3D_SWIZZLE_SYMMETRICAL_XY + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_XZ = PUTTY3D_SWIZZLE_SYMMETRICAL_YX + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_ZX = PUTTY3D_SWIZZLE_SYMMETRICAL_XZ + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_YZ = PUTTY3D_SWIZZLE_SYMMETRICAL_ZX + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_ZY = PUTTY3D_SWIZZLE_SYMMETRICAL_YZ + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_XYZ = PUTTY3D_SWIZZLE_SYMMETRICAL_ZY + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_XZY = PUTTY3D_SWIZZLE_SYMMETRICAL_XYZ + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_YXZ = PUTTY3D_SWIZZLE_SYMMETRICAL_XZY + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_YZX = PUTTY3D_SWIZZLE_SYMMETRICAL_YXZ + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_ZXY = PUTTY3D_SWIZZLE_SYMMETRICAL_YZX + 1;
+const int PUTTY3D_SWIZZLE_SYMMETRICAL_ZYX = PUTTY3D_SWIZZLE_SYMMETRICAL_ZXY + 1;
 
-vec3 sdf3D_swizzle(vec3 raycast_position, int modification)
+vec3 putty3D_swizzle(vec3 raycast_position, int modification)
 {
 	switch (modification)
 	{
-		case SDF3D_SWIZZLE_YX:
+		case PUTTY3D_SWIZZLE_YX:
 			raycast_position.xy = raycast_position.yx;
 			break;
-		case SDF3D_SWIZZLE_ZX:
+		case PUTTY3D_SWIZZLE_ZX:
 			raycast_position.xz = raycast_position.zx;
 			break;
-		case SDF3D_SWIZZLE_ZY:
+		case PUTTY3D_SWIZZLE_ZY:
 			raycast_position.yz = raycast_position.zy;
 			break;
-		case SDF3D_SWIZZLE_XZY:
+		case PUTTY3D_SWIZZLE_XZY:
 			raycast_position.xyz = raycast_position.xzy;
 			break;
-		case SDF3D_SWIZZLE_YXZ:
+		case PUTTY3D_SWIZZLE_YXZ:
 			raycast_position.xyz = raycast_position.yxz;
 			break;
-		case SDF3D_SWIZZLE_YZX:
+		case PUTTY3D_SWIZZLE_YZX:
 			raycast_position.xyz = raycast_position.yzx;
 			break;
-		case SDF3D_SWIZZLE_ZXY:
+		case PUTTY3D_SWIZZLE_ZXY:
 			raycast_position.xyz = raycast_position.zxy;
 			break;
-		case SDF3D_SWIZZLE_ZYX:
+		case PUTTY3D_SWIZZLE_ZYX:
 			raycast_position.xyz = raycast_position.zyx;
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_X:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_X:
 			raycast_position.x = abs(raycast_position.x);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_Y:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_Y:
 			raycast_position.y = abs(raycast_position.y);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_Z:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_Z:
 			raycast_position.z = abs(raycast_position.z);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_XY:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_XY:
 			raycast_position.xy = abs(raycast_position.xy);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_YX:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_YX:
 			raycast_position.xy = abs(raycast_position.yx);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_XZ:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_XZ:
 			raycast_position.xz = abs(raycast_position.xz);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_ZX:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_ZX:
 			raycast_position.xz = abs(raycast_position.zx);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_YZ:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_YZ:
 			raycast_position.yz = abs(raycast_position.yz);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_ZY:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_ZY:
 			raycast_position.yz = abs(raycast_position.zy);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_XYZ:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_XYZ:
 			raycast_position.xyz = abs(raycast_position.xyz);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_XZY:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_XZY:
 			raycast_position.xyz = abs(raycast_position.xzy);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_YXZ:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_YXZ:
 			raycast_position.xyz = abs(raycast_position.yxz);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_YZX:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_YZX:
 			raycast_position.xyz = abs(raycast_position.yzx);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_ZXY:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_ZXY:
 			raycast_position.xyz = abs(raycast_position.zxy);
 			break;
-		case SDF3D_SWIZZLE_SYMMETRICAL_ZYX:
+		case PUTTY3D_SWIZZLE_SYMMETRICAL_ZYX:
 			raycast_position.xyz = abs(raycast_position.zyx);
 			break;
 	}
@@ -126,61 +126,61 @@ vec3 sdf3D_swizzle(vec3 raycast_position, int modification)
 	return raycast_position;
 }
 
-const int SDF3D_SHAPE_SPHERE = 0;
-const int SDF3D_SHAPE_BOX = SDF3D_SHAPE_SPHERE + 1;
-const int SDF3D_SHAPE_ROUNDED_BOX = SDF3D_SHAPE_BOX + 1;
-const int SDF3D_SHAPE_BOX_FRAME = SDF3D_SHAPE_ROUNDED_BOX + 1;
-const int SDF3D_SHAPE_TORUS = SDF3D_SHAPE_BOX_FRAME + 1;
-const int SDF3D_SHAPE_CAPPED_TORUS = SDF3D_SHAPE_TORUS + 1;
-const int SDF3D_SHAPE_LINK = SDF3D_SHAPE_CAPPED_TORUS + 1;
-const int SDF3D_SHAPE_INFINITE_CYLINDER = SDF3D_SHAPE_LINK + 1;
-const int SDF3D_SHAPE_CONE = SDF3D_SHAPE_INFINITE_CYLINDER + 1;
-const int SDF3D_SHAPE_INFINITE_CONE = SDF3D_SHAPE_CONE + 1;
-const int SDF3D_SHAPE_PLANE = SDF3D_SHAPE_INFINITE_CONE + 1;
-const int SDF3D_SHAPE_HEXAGONAL_PRISM = SDF3D_SHAPE_PLANE + 1;
-const int SDF3D_SHAPE_TRIANGULAR_PRISM = SDF3D_SHAPE_HEXAGONAL_PRISM + 1;
-const int SDF3D_SHAPE_VERTICAL_CAPSULE = SDF3D_SHAPE_TRIANGULAR_PRISM + 1;
-const int SDF3D_SHAPE_ARBITRARY_CAPSULE = SDF3D_SHAPE_VERTICAL_CAPSULE + 1;
-const int SDF3D_SHAPE_VERTICAL_CAPPED_CYLINDER = SDF3D_SHAPE_ARBITRARY_CAPSULE + 1;
-const int SDF3D_SHAPE_ARBITRARY_CAPPED_CYLINDER = SDF3D_SHAPE_VERTICAL_CAPPED_CYLINDER + 1;
-const int SDF3D_SHAPE_ROUNDED_CYLINDER = SDF3D_SHAPE_ARBITRARY_CAPPED_CYLINDER + 1;
-const int SDF3D_SHAPE_VERTICAL_CAPPED_CONE = SDF3D_SHAPE_ROUNDED_CYLINDER + 1;
-const int SDF3D_SHAPE_ARBITRARY_CAPPED_CONE = SDF3D_SHAPE_VERTICAL_CAPPED_CONE + 1;
-const int SDF3D_SHAPE_SOLID_ANGLE = SDF3D_SHAPE_ARBITRARY_CAPPED_CONE + 1;
-const int SDF3D_SHAPE_CUT_SPHERE = SDF3D_SHAPE_SOLID_ANGLE + 1;
-const int SDF3D_SHAPE_CUT_HOLLOW_SPHERE = SDF3D_SHAPE_CUT_SPHERE + 1;
-const int SDF3D_SHAPE_VERTICAL_ROUND_CONE = SDF3D_SHAPE_CUT_HOLLOW_SPHERE + 1;
-const int SDF3D_SHAPE_ARBITRARY_ROUND_CONE = SDF3D_SHAPE_VERTICAL_ROUND_CONE + 1;
-const int SDF3D_SHAPE_ELLIPSOID_BOUND = SDF3D_SHAPE_ARBITRARY_ROUND_CONE + 1;
-const int SDF3D_SHAPE_VERTICAL_VESICA_SEGMENT = SDF3D_SHAPE_ELLIPSOID_BOUND + 1;
-const int SDF3D_SHAPE_ARBITRARY_VESICA_SEGMENT = SDF3D_SHAPE_VERTICAL_VESICA_SEGMENT + 1;
-const int SDF3D_SHAPE_RHOMBUS = SDF3D_SHAPE_ARBITRARY_VESICA_SEGMENT + 1;
-const int SDF3D_SHAPE_OCTAHEDRON = SDF3D_SHAPE_RHOMBUS + 1;
-const int SDF3D_SHAPE_PYRAMID = SDF3D_SHAPE_OCTAHEDRON + 1;
+const int PUTTY3D_SHAPE_SPHERE = 0;
+const int PUTTY3D_SHAPE_BOX = PUTTY3D_SHAPE_SPHERE + 1;
+const int PUTTY3D_SHAPE_ROUNDED_BOX = PUTTY3D_SHAPE_BOX + 1;
+const int PUTTY3D_SHAPE_BOX_FRAME = PUTTY3D_SHAPE_ROUNDED_BOX + 1;
+const int PUTTY3D_SHAPE_TORUS = PUTTY3D_SHAPE_BOX_FRAME + 1;
+const int PUTTY3D_SHAPE_CAPPED_TORUS = PUTTY3D_SHAPE_TORUS + 1;
+const int PUTTY3D_SHAPE_LINK = PUTTY3D_SHAPE_CAPPED_TORUS + 1;
+const int PUTTY3D_SHAPE_INFINITE_CYLINDER = PUTTY3D_SHAPE_LINK + 1;
+const int PUTTY3D_SHAPE_CONE = PUTTY3D_SHAPE_INFINITE_CYLINDER + 1;
+const int PUTTY3D_SHAPE_INFINITE_CONE = PUTTY3D_SHAPE_CONE + 1;
+const int PUTTY3D_SHAPE_PLANE = PUTTY3D_SHAPE_INFINITE_CONE + 1;
+const int PUTTY3D_SHAPE_HEXAGONAL_PRISM = PUTTY3D_SHAPE_PLANE + 1;
+const int PUTTY3D_SHAPE_TRIANGULAR_PRISM = PUTTY3D_SHAPE_HEXAGONAL_PRISM + 1;
+const int PUTTY3D_SHAPE_VERTICAL_CAPSULE = PUTTY3D_SHAPE_TRIANGULAR_PRISM + 1;
+const int PUTTY3D_SHAPE_ARBITRARY_CAPSULE = PUTTY3D_SHAPE_VERTICAL_CAPSULE + 1;
+const int PUTTY3D_SHAPE_VERTICAL_CAPPED_CYLINDER = PUTTY3D_SHAPE_ARBITRARY_CAPSULE + 1;
+const int PUTTY3D_SHAPE_ARBITRARY_CAPPED_CYLINDER = PUTTY3D_SHAPE_VERTICAL_CAPPED_CYLINDER + 1;
+const int PUTTY3D_SHAPE_ROUNDED_CYLINDER = PUTTY3D_SHAPE_ARBITRARY_CAPPED_CYLINDER + 1;
+const int PUTTY3D_SHAPE_VERTICAL_CAPPED_CONE = PUTTY3D_SHAPE_ROUNDED_CYLINDER + 1;
+const int PUTTY3D_SHAPE_ARBITRARY_CAPPED_CONE = PUTTY3D_SHAPE_VERTICAL_CAPPED_CONE + 1;
+const int PUTTY3D_SHAPE_SOLID_ANGLE = PUTTY3D_SHAPE_ARBITRARY_CAPPED_CONE + 1;
+const int PUTTY3D_SHAPE_CUT_SPHERE = PUTTY3D_SHAPE_SOLID_ANGLE + 1;
+const int PUTTY3D_SHAPE_CUT_HOLLOW_SPHERE = PUTTY3D_SHAPE_CUT_SPHERE + 1;
+const int PUTTY3D_SHAPE_VERTICAL_ROUND_CONE = PUTTY3D_SHAPE_CUT_HOLLOW_SPHERE + 1;
+const int PUTTY3D_SHAPE_ARBITRARY_ROUND_CONE = PUTTY3D_SHAPE_VERTICAL_ROUND_CONE + 1;
+const int PUTTY3D_SHAPE_ELLIPSOID_BOUND = PUTTY3D_SHAPE_ARBITRARY_ROUND_CONE + 1;
+const int PUTTY3D_SHAPE_VERTICAL_VESICA_SEGMENT = PUTTY3D_SHAPE_ELLIPSOID_BOUND + 1;
+const int PUTTY3D_SHAPE_ARBITRARY_VESICA_SEGMENT = PUTTY3D_SHAPE_VERTICAL_VESICA_SEGMENT + 1;
+const int PUTTY3D_SHAPE_RHOMBUS = PUTTY3D_SHAPE_ARBITRARY_VESICA_SEGMENT + 1;
+const int PUTTY3D_SHAPE_OCTAHEDRON = PUTTY3D_SHAPE_RHOMBUS + 1;
+const int PUTTY3D_SHAPE_PYRAMID = PUTTY3D_SHAPE_OCTAHEDRON + 1;
 
-float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float scale, float prev_sdf, vec4 args1, vec4 args2)
+float putty3D_generate(vec3 raycast_position, int shape, mat4 transform, float scale, vec4 args1, vec4 args2)
 {
 	const float INFINITY = 3.402823466e38;
 	float sdf = INFINITY;
 
-	raycast_position = (transform * vec4(raycast_position, 1.0)).xyz / scale;
+	raycast_position = (transform * vec4(raycast_position, 1.0)).xyz;
 
 	switch (shape)
 	{
-		case SDF3D_SHAPE_SPHERE:
+		case PUTTY3D_SHAPE_SPHERE:
 			 // Radius
 
 			sdf = length(raycast_position) - args1.x;
 			break;
 
-		case SDF3D_SHAPE_BOX:
+		case PUTTY3D_SHAPE_BOX:
 			 // Bounds
 
 			vec3 q = abs(raycast_position) - vec3(args1.x, args1.y, args1.z);
 			sdf = length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);
 			break;
 
-		case SDF3D_SHAPE_ROUNDED_BOX:
+		case PUTTY3D_SHAPE_ROUNDED_BOX:
 			 // Bounds
 			 // Rounding radius
 
@@ -188,7 +188,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0) - args1.w;
 			break;
 
-		case SDF3D_SHAPE_BOX_FRAME:
+		case PUTTY3D_SHAPE_BOX_FRAME:
 			 // Bounds
 			 // Edge width
 
@@ -200,7 +200,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			length(max(vec3(q.x, q.y, raycast_position.z),0.0)) + min(max(q.x, max(q.y, raycast_position.z)), 0.0));
 			break;
 
-		case SDF3D_SHAPE_TORUS:
+		case PUTTY3D_SHAPE_TORUS:
 			 // Radius
 			 // Thickness
 
@@ -208,7 +208,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = length(q) - args1.y;
 			break;
 
-		case SDF3D_SHAPE_CAPPED_TORUS:
+		case PUTTY3D_SHAPE_CAPPED_TORUS:
 			 // Angle
 			 // Radius
 			 // Thickness
@@ -219,7 +219,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = sqrt(dot(raycast_position, raycast_position) + args1.y * args1.y - 2.0 * args1.y * k) - args1.z;
 			break;
 
-		case SDF3D_SHAPE_LINK:
+		case PUTTY3D_SHAPE_LINK:
 			 // Length
 			 // Radius
 			 // Thickness
@@ -228,14 +228,14 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = length(vec2(length(q.xy) - args1.y, q.z)) - args1.z;
 			break;
 
-		case SDF3D_SHAPE_INFINITE_CYLINDER:
+		case PUTTY3D_SHAPE_INFINITE_CYLINDER:
 			 // Position Offset
 			 // Radius
 
 			sdf = length(raycast_position.xz - vec2(args1.x, args1.y)) - args1.z;
 			break;
 
-		case SDF3D_SHAPE_CONE:
+		case PUTTY3D_SHAPE_CONE:
 			 // Angle
 			 // Height
 
@@ -251,7 +251,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = sqrt(d) * sign(s);
 			break;
 
-		case SDF3D_SHAPE_INFINITE_CONE:
+		case PUTTY3D_SHAPE_INFINITE_CONE:
 			 // Angle
 
 			vec2 sin_cosine = vec2(sin(args1.x), cos(args1.x));
@@ -261,14 +261,14 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = d * ((q.x * sin_cosine.y - q.y * sin_cosine.x < 0.0) ? -1.0 : 1.0);
 			break;
 
-		case SDF3D_SHAPE_PLANE:
+		case PUTTY3D_SHAPE_PLANE:
 			 // Normal
 			 // Height
 
 			sdf = dot(raycast_position, vec3(args1.x, args1.y, args1.z)) + args1.w;
 			break;
 
-		case SDF3D_SHAPE_HEXAGONAL_PRISM:
+		case PUTTY3D_SHAPE_HEXAGONAL_PRISM:
 			 // Radius
 			 // Length
 
@@ -281,7 +281,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = min(max(d.x, d.y), 0.0) + length(max(d, 0.0));
 			break;
 
-		case SDF3D_SHAPE_TRIANGULAR_PRISM:
+		case PUTTY3D_SHAPE_TRIANGULAR_PRISM:
 			 // Radius
 			 // Length
 
@@ -303,7 +303,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = length(max(vec2(d1, d2), 0.0)) + min(max(d1, d2), 0.0);
 			break;
 
-		case SDF3D_SHAPE_VERTICAL_CAPSULE:
+		case PUTTY3D_SHAPE_VERTICAL_CAPSULE:
 			 // Height
 			 // Radius
 
@@ -311,7 +311,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = length(raycast_position) - args1.y;
 			break;
 
-		case SDF3D_SHAPE_ARBITRARY_CAPSULE:
+		case PUTTY3D_SHAPE_ARBITRARY_CAPSULE:
 			 // Start
 			 // End
 			 // Radius
@@ -321,7 +321,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = length(pa - ba * h) - args2.z;
 			break;
 
-		case SDF3D_SHAPE_VERTICAL_CAPPED_CYLINDER:
+		case PUTTY3D_SHAPE_VERTICAL_CAPPED_CYLINDER:
 			 // Height
 			 // Radius
 
@@ -329,7 +329,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = min(max(d.x, d.y), 0.0) + length(max(d, 0.0));
 			break;
 
-		case SDF3D_SHAPE_ARBITRARY_CAPPED_CYLINDER:
+		case PUTTY3D_SHAPE_ARBITRARY_CAPPED_CYLINDER:
 			 // Start
 			 // End
 			 // Radius
@@ -346,7 +346,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = sign(d) * sqrt(abs(d)) / baba;
 			break;
 
-		case SDF3D_SHAPE_ROUNDED_CYLINDER:
+		case PUTTY3D_SHAPE_ROUNDED_CYLINDER:
 			 // Cylinder Radius
 			 // Rounding Radius
 			 // Height
@@ -355,7 +355,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = min(max(d.x, d.y), 0.0) + length(max(d, 0.0)) - args1.y;
 			break;
 
-		case SDF3D_SHAPE_VERTICAL_CAPPED_CONE:
+		case PUTTY3D_SHAPE_VERTICAL_CAPPED_CONE:
 			 // Height
 			 // Bottom Radius
 			 // Top Radius
@@ -369,7 +369,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = s * sqrt(min(dot(ca, ca), dot(cb, cb)));
 			break;
 
-		case SDF3D_SHAPE_ARBITRARY_CAPPED_CONE:
+		case PUTTY3D_SHAPE_ARBITRARY_CAPPED_CONE:
 			 // Start
 			 // End
 			 // Bottom Radius
@@ -390,7 +390,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = s * sqrt(min(cax*cax + cay * cay * baba, cbx * cbx + cby * cby * baba));
 			break;
 
-		case SDF3D_SHAPE_SOLID_ANGLE:
+		case PUTTY3D_SHAPE_SOLID_ANGLE:
 			 // Angle
 			 // Radius
 
@@ -401,7 +401,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = max(l, m * sign(sin_cosine.y * q.x - sin_cosine.x * q.y));
 			break;
 
-		case SDF3D_SHAPE_CUT_SPHERE:
+		case PUTTY3D_SHAPE_CUT_SPHERE:
 			 // Radius
 			 // Cut Depth
 
@@ -414,7 +414,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = (s < 0.0) ? length(q) - args1.x : (q.x < w) ? args1.y - q.y : length(q - vec2(w, args1.y));
 			break;
 
-		case SDF3D_SHAPE_CUT_HOLLOW_SPHERE:
+		case PUTTY3D_SHAPE_CUT_HOLLOW_SPHERE:
 			 // Radius
 			 // Cut Depth
 			 // Thickness
@@ -427,7 +427,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = ((args1.y * q.x < w * q.y) ? length(q - vec2(w, args1.y)) : abs(length(q) - args1.x)) - args1.z;
 			break;
 
-		case SDF3D_SHAPE_VERTICAL_ROUND_CONE:
+		case PUTTY3D_SHAPE_VERTICAL_ROUND_CONE:
 			 // Height
 			 // Bottom Radius
 			 // Top Radius
@@ -449,7 +449,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 
 			break;
 
-		case SDF3D_SHAPE_ARBITRARY_ROUND_CONE:
+		case PUTTY3D_SHAPE_ARBITRARY_ROUND_CONE:
 			 // Start
 			 // End
 			 // Bottom Radius
@@ -482,7 +482,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 
 			break;
 
-		case SDF3D_SHAPE_ELLIPSOID_BOUND:
+		case PUTTY3D_SHAPE_ELLIPSOID_BOUND:
 			 // Radii
 
 			float k0 = length(raycast_position / vec3(args1.x, args1.y, args1.z));
@@ -490,7 +490,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = k0 * (k0 - 1.0) / k1;
 			break;
 
-		case SDF3D_SHAPE_VERTICAL_VESICA_SEGMENT:
+		case PUTTY3D_SHAPE_VERTICAL_VESICA_SEGMENT:
 			 // Height
 			 // Weight
 
@@ -509,7 +509,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = length(q - t.xy) - t.z;
 			break;
 
-		case SDF3D_SHAPE_ARBITRARY_VESICA_SEGMENT:
+		case PUTTY3D_SHAPE_ARBITRARY_VESICA_SEGMENT:
 			 // Start
 			 // End
 			 // Weight
@@ -533,7 +533,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = length(q - t.xy) - t.z;
 			break;
 
-		case SDF3D_SHAPE_RHOMBUS:
+		case PUTTY3D_SHAPE_RHOMBUS:
 			 // Horizontal Length
 			 // Vertical Length
 			 // Height
@@ -548,7 +548,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 			sdf = min(max(q.x, q.y), 0.0) + length(max(q, 0.0));
 			break;
 
-		case SDF3D_SHAPE_OCTAHEDRON:
+		case PUTTY3D_SHAPE_OCTAHEDRON:
 			 // Radius
 
 			raycast_position = abs(raycast_position);
@@ -573,7 +573,7 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 
 			break;
 
-		case SDF3D_SHAPE_PYRAMID:
+		case PUTTY3D_SHAPE_PYRAMID:
 			 // Height
 
 			float m2 = args1.x * args1.x + 0.25;
@@ -602,48 +602,48 @@ float sdf3D_generate(vec3 raycast_position, int shape, mat4 transform, float sca
 	return sdf * scale;
 }
 
-const int SDF3D_MODIFIER_INFINITE_DOMAIN_REPETITION = 0;
-const int SDF3D_MODIFIER_FINITE_DOMAIN_REPETITION = SDF3D_MODIFIER_INFINITE_DOMAIN_REPETITION + 1;
-const int SDF3D_MODIFIER_ELONGATION = SDF3D_MODIFIER_FINITE_DOMAIN_REPETITION + 1;
-const int SDF3D_MODIFIER_ROUND = SDF3D_MODIFIER_ELONGATION + 1;
-const int SDF3D_MODIFIER_ONION = SDF3D_MODIFIER_ROUND + 1;
-const int SDF3D_MODIFIER_DISPLACE = SDF3D_MODIFIER_ONION + 1;
-const int SDF3D_MODIFIER_TWIST = SDF3D_MODIFIER_DISPLACE + 1;
-const int SDF3D_MODIFIER_BEND = SDF3D_MODIFIER_TWIST + 1;
+const int PUTTY3D_MODIFIER_INFINITE_DOMAIN_REPETITION = 0;
+const int PUTTY3D_MODIFIER_FINITE_DOMAIN_REPETITION = PUTTY3D_MODIFIER_INFINITE_DOMAIN_REPETITION + 1;
+const int PUTTY3D_MODIFIER_ELONGATION = PUTTY3D_MODIFIER_FINITE_DOMAIN_REPETITION + 1;
+const int PUTTY3D_MODIFIER_ROUND = PUTTY3D_MODIFIER_ELONGATION + 1;
+const int PUTTY3D_MODIFIER_ONION = PUTTY3D_MODIFIER_ROUND + 1;
+const int PUTTY3D_MODIFIER_DISPLACE = PUTTY3D_MODIFIER_ONION + 1;
+const int PUTTY3D_MODIFIER_TWIST = PUTTY3D_MODIFIER_DISPLACE + 1;
+const int PUTTY3D_MODIFIER_BEND = PUTTY3D_MODIFIER_TWIST + 1;
 
-float sdf3D_modify(int modifier, vec3 raycast_position, int shape, mat4 transform, float scale, float prev_sdf, vec4 shape_args1, vec4 shape_args2)
+float putty3D_modify(int modifier, vec3 raycast_position, int shape, mat4 transform, float scale, float prev_sdf, vec4 shape_args1, vec4 shape_args2)
 {
 	switch (modifier)
 	{
-		case SDF3D_MODIFIER_INFINITE_DOMAIN_REPETITION:
+		case PUTTY3D_MODIFIER_INFINITE_DOMAIN_REPETITION:
 
 			break;
 
-		case SDF3D_MODIFIER_FINITE_DOMAIN_REPETITION:
+		case PUTTY3D_MODIFIER_FINITE_DOMAIN_REPETITION:
 
 			break;
 
-		case SDF3D_MODIFIER_ELONGATION:
+		case PUTTY3D_MODIFIER_ELONGATION:
 
 			break;
 
-		case SDF3D_MODIFIER_ROUND:
+		case PUTTY3D_MODIFIER_ROUND:
 
 			break;
 
-		case SDF3D_MODIFIER_ONION:
+		case PUTTY3D_MODIFIER_ONION:
 
 			break;
 
-		case SDF3D_MODIFIER_DISPLACE:
+		case PUTTY3D_MODIFIER_DISPLACE:
 
 			break;
 
-		case SDF3D_MODIFIER_TWIST:
+		case PUTTY3D_MODIFIER_TWIST:
 
 			break;
 
-		case SDF3D_MODIFIER_BEND:
+		case PUTTY3D_MODIFIER_BEND:
 
 			break;
 
@@ -653,48 +653,237 @@ float sdf3D_modify(int modifier, vec3 raycast_position, int shape, mat4 transfor
 	return 0.0;
 }
 
-const int SDF3D_COMBINER_UNION = 0;
-const int SDF3D_COMBINER_XOR = SDF3D_COMBINER_UNION + 1;
-const int SDF3D_COMBINER_SUBTRACTION_BOUND = SDF3D_COMBINER_XOR + 1;
-const int SDF3D_COMBINER_INTERSECTION_BOUND = SDF3D_COMBINER_SUBTRACTION_BOUND + 1;
-const int SDF3D_COMBINER_SMOOTH_UNION_BOUND = SDF3D_COMBINER_INTERSECTION_BOUND + 1;
-const int SDF3D_COMBINER_SMOOTH_SUBTRACTION_BOUND = SDF3D_COMBINER_SMOOTH_UNION_BOUND + 1;
-const int SDF3D_COMBINER_SMOOTH_INTERSECTION_BOUND = SDF3D_COMBINER_SMOOTH_SUBTRACTION_BOUND + 1;
+const int PUTTY3D_COMBINATION_UNION = 0;
+const int PUTTY3D_COMBINATION_XOR = PUTTY3D_COMBINATION_UNION + 1;
+const int PUTTY3D_COMBINATION_SUBTRACTION = PUTTY3D_COMBINATION_XOR + 1;
+const int PUTTY3D_COMBINATION_INTERSECTION = PUTTY3D_COMBINATION_SUBTRACTION + 1;
+const int PUTTY3D_COMBINATION_SMOOTH_UNION = PUTTY3D_COMBINATION_INTERSECTION + 1;
+const int PUTTY3D_COMBINATION_SMOOTH_SUBTRACTION = PUTTY3D_COMBINATION_SMOOTH_UNION + 1;
+const int PUTTY3D_COMBINATION_SMOOTH_INTERSECTION = PUTTY3D_COMBINATION_SMOOTH_SUBTRACTION + 1;
+const int PUTTY3D_COMBINATION_CHAMFER_UNION = PUTTY3D_COMBINATION_SMOOTH_INTERSECTION + 1;
+const int PUTTY3D_COMBINATION_CHAMFER_SUBTRACTION = PUTTY3D_COMBINATION_CHAMFER_UNION + 1;
+const int PUTTY3D_COMBINATION_CHAMFER_INTERSECTION = PUTTY3D_COMBINATION_CHAMFER_SUBTRACTION + 1;
+const int PUTTY3D_COMBINATION_ROUND_UNION = PUTTY3D_COMBINATION_CHAMFER_INTERSECTION + 1;
+const int PUTTY3D_COMBINATION_ROUND_SUBTRACTION = PUTTY3D_COMBINATION_ROUND_UNION + 1;
+const int PUTTY3D_COMBINATION_ROUND_INTERSECTION = PUTTY3D_COMBINATION_ROUND_SUBTRACTION + 1;
+const int PUTTY3D_COMBINATION_SOFT_UNION = PUTTY3D_COMBINATION_ROUND_INTERSECTION + 1;
+const int PUTTY3D_COMBINATION_PIPE = PUTTY3D_COMBINATION_SOFT_UNION + 1;
+const int PUTTY3D_COMBINATION_ENGRAVE = PUTTY3D_COMBINATION_PIPE + 1;
+const int PUTTY3D_COMBINATION_GROOVE = PUTTY3D_COMBINATION_ENGRAVE + 1;
+const int PUTTY3D_COMBINATION_TONGUE = PUTTY3D_COMBINATION_GROOVE + 1;
+const int PUTTY3D_COMBINATION_COLUMNS_UNION = PUTTY3D_COMBINATION_TONGUE + 1;
+const int PUTTY3D_COMBINATION_COLUMNS_SUBTRACTION = PUTTY3D_COMBINATION_COLUMNS_UNION + 1;
+const int PUTTY3D_COMBINATION_COLUMNS_INTERSECTION = PUTTY3D_COMBINATION_COLUMNS_SUBTRACTION + 1;
+const int PUTTY3D_COMBINATION_STAIRS_UNION = PUTTY3D_COMBINATION_COLUMNS_INTERSECTION + 1;
+const int PUTTY3D_COMBINATION_STAIRS_SUBTRACTION = PUTTY3D_COMBINATION_STAIRS_UNION + 1;
+const int PUTTY3D_COMBINATION_STAIRS_INTERSECTION = PUTTY3D_COMBINATION_STAIRS_SUBTRACTION + 1;
 
-float sdf3D_combine(float sdf1, float sdf2, int combination, float smoothing_radius)
+vec2 _p_rot_45(vec2 p)
+{
+	return (p + vec2(p.y, -p.x)) * sqrt(0.5);
+}
+
+vec2 _p_mod_1(float p, float size)
+{
+	float halfsize = size * 0.5;
+	float c = floor((p + halfsize) / size);
+	return vec2(mod(p + halfsize, size) - halfsize, c);
+}
+
+float _columns_union(float a, float b, float r, float n)
+{
+	if ((a < r) && (b < r))
+	{
+		vec2 p = vec2(a, b);
+		float column_radius = r * sqrt(2) / (float((int(n) - 1) * 2) + sqrt(2));
+
+		p = _p_rot_45(p);
+		p.x -= sqrt(2) / 2.0 * r;
+		p.x += column_radius * sqrt(2);
+
+		if (int(n) % 2 == 1)
+			p.y += column_radius;
+
+		// At this point, we have turned 45 degrees and moved at a point on the
+		// diagonal that we want to place the columns on.
+		// Now, repeat the domain along this direction and place a circle.
+		p.y = _p_mod_1(p.y, column_radius * 2.0).x;
+
+		float result = length(p) - column_radius;
+		
+		result = min(result, p.x);
+		result = min(result, a);
+
+		return min(result, b);
+	}
+
+	return min(a, b);
+}
+
+float _columns_subtraction(float a, float b, float r, float n)
+{
+	a = -a;
+	float m = min(a, b);
+
+	//avoid the expensive computation where not needed (produces discontinuity though)
+	if ((a < r) && (b < r))
+	{
+		vec2 p = vec2(a, b);
+		float column_radius = r * sqrt(2) / n / 2.0;
+		column_radius = r * sqrt(2) / (float((int(n) - 1) * 2) + sqrt(2));
+
+		p = _p_rot_45(p);
+		p.y += column_radius;
+		p.x -= sqrt(2) / 2.0 * r;
+		p.x += -column_radius * sqrt(2) / 2.0;
+
+		if (int(n) % 2 == 1)
+			p.y += column_radius;
+
+		p.y = _p_mod_1(p.y, column_radius * 2.0).x;
+
+		float result = -length(p) + column_radius;
+
+		result = max(result, p.x);
+		result = min(result, a);
+
+		return -min(result, b);
+	}
+
+	return -m;
+}
+
+float _stairs_union(float a, float b, float r, float n)
+{
+	float s = r / n;
+	float u = b - r;
+	return min(min(a, b), 0.5 * (u + a + abs((mod(u - a + s, 2.0 * s)) - s)));
+}
+
+// End License
+
+float putty3D_combine(float sdf1, float sdf2, vec4 args)
 {
 	float sdf = sdf1;
 
-	switch (combination)
+	float first_radius = args.y;
+	float second_radius = args.z;
+	float steps = args.w;
+
+	float h; // HUE HUE HUE
+	vec2 u;
+	float e;
+
+	switch (int(args.x))
 	{
-		case SDF3D_COMBINER_XOR:
+		// The following functions (including Union) are taken from Inigo Quilez's article on 3D SDFs
+		// https://iquilezles.org/articles/distfunctions/
+		// Licensed under the MIT License.
+
+		case PUTTY3D_COMBINATION_XOR:
 			sdf = max(min(sdf1, sdf2), -max(sdf1, sdf2));
 			break;
-
-		case SDF3D_COMBINER_SUBTRACTION_BOUND:
+		
+		case PUTTY3D_COMBINATION_SUBTRACTION:
 			sdf = max(-sdf1, sdf2);
 			break;
-
-		case SDF3D_COMBINER_INTERSECTION_BOUND:
+		
+		case PUTTY3D_COMBINATION_INTERSECTION:
 			sdf = max(sdf1, sdf2);
 			break;
-
-		case SDF3D_COMBINER_SMOOTH_UNION_BOUND:
-			float h = clamp(0.5 + 0.5 * (sdf2 - sdf1) / smoothing_radius, 0.0, 1.0);
-			sdf = mix(sdf2, sdf1, h) - smoothing_radius * h * (1.0 - h);
+		
+		case PUTTY3D_COMBINATION_SMOOTH_UNION:
+			h = clamp(0.5 + 0.5 * (sdf2 - sdf1) / first_radius, 0.0, 1.0);
+			sdf = mix(sdf2, sdf1, h) - first_radius * h * (1.0 - h);
+			break;
+		
+		case PUTTY3D_COMBINATION_SMOOTH_SUBTRACTION:
+			h = clamp(0.5 - 0.5 * (sdf2 + sdf1) / first_radius, 0.0, 1.0);
+			sdf = mix(sdf2, -sdf1, h) + first_radius * h * (1.0 - h);
+			break;
+		
+		case PUTTY3D_COMBINATION_SMOOTH_INTERSECTION:
+			h = clamp(0.5 - 0.5 * (sdf2 - sdf1) / first_radius, 0.0, 1.0);
+			sdf = mix(sdf2, sdf1, h) + first_radius * h * (1.0 - h);
 			break;
 
-		case SDF3D_COMBINER_SMOOTH_SUBTRACTION_BOUND:
-			float h = clamp(0.5 - 0.5 * (sdf2 + sdf1) / smoothing_radius, 0.0, 1.0);
-			sdf = mix(sdf2, -sdf1, h) + smoothing_radius * h * (1.0 - h);
+		// The following functions are taken from the Mercury Demogroup's hg_sdf file:
+		// https://mercury.sexy/hg_sdf/
+		// Licensed under the MIT License.
+		
+		case PUTTY3D_COMBINATION_CHAMFER_UNION:
+			sdf = min(min(sdf2, sdf1), (sdf2 - first_radius + sdf1) * sqrt(0.5));
+			break;
+		
+		case PUTTY3D_COMBINATION_CHAMFER_SUBTRACTION:
+			sdf = max(max(sdf2, -sdf1), (sdf2 + first_radius + -sdf1) * sqrt(0.5));
+			break;
+		
+		case PUTTY3D_COMBINATION_CHAMFER_INTERSECTION:
+			sdf = max(max(sdf2, sdf1), (sdf2 + first_radius + sdf1) * sqrt(0.5));
+			break;
+		
+		case PUTTY3D_COMBINATION_ROUND_UNION:
+			u = max(vec2(first_radius - sdf2, first_radius - sdf1), 0.0);
+			sdf = max(first_radius, min(sdf2, sdf1)) - length(u);
+			break;
+		
+		case PUTTY3D_COMBINATION_ROUND_SUBTRACTION:
+			u = max(vec2(first_radius + sdf2, first_radius + -sdf1), 0.0);
+			sdf = min(-first_radius, max(sdf2, -sdf1)) + length(u);
+			break;
+		
+		case PUTTY3D_COMBINATION_ROUND_INTERSECTION:
+			u = max(vec2(first_radius + sdf2, first_radius + sdf1), 0.0);
+			sdf = min(-first_radius, max(sdf2, sdf1)) + length(u);
+			break;
+		
+		case PUTTY3D_COMBINATION_SOFT_UNION:
+			e = max(first_radius - abs(sdf2 - sdf1), 0.0);
+			sdf = min(sdf2, sdf1) - e * e * 0.25 / first_radius;
+			break;
+		
+		case PUTTY3D_COMBINATION_PIPE:
+			sdf = length(vec2(sdf2, sdf1)) - first_radius;
+			break;
+		
+		case PUTTY3D_COMBINATION_ENGRAVE:
+			sdf = max(sdf2, (sdf2 + first_radius - abs(sdf1)) * sqrt(0.5));
+			break;
+		
+		case PUTTY3D_COMBINATION_GROOVE:
+			sdf = max(sdf2, min(sdf2 + first_radius, second_radius - abs(sdf1)));
+			break;
+		
+		case PUTTY3D_COMBINATION_TONGUE:
+			sdf = min(sdf2, max(sdf2 - first_radius, abs(sdf1) - second_radius));
+			break;
+		
+		case PUTTY3D_COMBINATION_COLUMNS_UNION:
+			sdf = _columns_union(sdf2, sdf1, first_radius, steps);
+			break;
+		
+		case PUTTY3D_COMBINATION_COLUMNS_SUBTRACTION:
+			sdf = _columns_subtraction(sdf2, sdf1, first_radius, steps);
+			break;
+		
+		case PUTTY3D_COMBINATION_COLUMNS_INTERSECTION:
+			sdf = _columns_subtraction(sdf2, -sdf1, first_radius, steps);
+			break;
+		
+		case PUTTY3D_COMBINATION_STAIRS_UNION:
+			sdf = _stairs_union(sdf2, sdf1, first_radius, steps);
+			break;
+		
+		case PUTTY3D_COMBINATION_STAIRS_SUBTRACTION:
+			sdf = -_stairs_union(-sdf2, sdf1, first_radius, steps);
+			break;
+		
+		case PUTTY3D_COMBINATION_STAIRS_INTERSECTION:
+			sdf = -_stairs_union(-sdf2, -sdf1, first_radius, steps);
 			break;
 
-		case SDF3D_COMBINER_SMOOTH_INTERSECTION_BOUND:
-			float h = clamp(0.5 - 0.5 * (sdf2 - sdf1) / smoothing_radius, 0.0, 1.0);
-			sdf = mix(sdf2, sdf1, h) + smoothing_radius * h * (1.0 - h);
-			break;
-
-		default: // Union
+		default:
 			sdf = min(sdf1, sdf2);
 			break;
 	}

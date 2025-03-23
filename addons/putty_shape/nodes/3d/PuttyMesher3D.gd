@@ -21,19 +21,19 @@
 # SOFTWARE.
 
 @tool
-@icon("res://addons/putty_shape/icons/putty_container_3D.svg")
-class_name PuttyContainer3D
+@icon("res://addons/putty_shape/icons/putty_mesher_3D.svg")
+class_name PuttyMesher3D
 extends MeshInstance3D
 
 ## Creates a 3D mesh out of [PuttyShape3D]s and their properties.
 ## 
-## The [PuttyContainer3D] is a specialized [MeshInstance3D] that renders
-## child [PuttyShape3D]s by using their corresponding [b]signed distance
+## The [PuttyMesher3D] is a specialized [MeshInstance3D] that renders
+## children [PuttyShape3D]s by using their corresponding [b]signed distance
 ## field[/b] ([b]SDF[/b]) functions to determine which points in a voxel
 ## area are inside the shapes, and then using those found points to construct
 ## a mesh using the [b]naive surface nets[/b] algorithm. This is done with a
 ## compute shader on a separate thread to calculate and build a [Mesh] as quickly
-## as reasonably possible.[br]
+## as reasonably possible.[br][br]
 ## [b][u]WARNING[/u][/b]: This node is currently [b][u][i]NOT[/i][/u][/b]
 ## intended for real-time release-build applications. This is meant to be
 ## an in-editor solution for building static meshes (or meshes to be rigged
@@ -43,7 +43,7 @@ extends MeshInstance3D
 ## 
 ## @tutorial(Mikola Lysenko's JS implementation of naive surface nets): https://github.com/mikolalysenko/mikolalysenko.github.com/blob/master/Isosurface/js/surfacenets.js
 
-const PUTTY_SAMPLER_3D := preload("res://addons/putty_shape/datatypes/3d/PuttySampler3D.glsl")
+const PUTTY_SAMPLER_3D := preload("res://addons/putty_shape/shaders/3d/PuttySampler3D.glsl")
 
 ## Sends a request to the other thread to update the mesh.
 @export_tool_button("Update")
@@ -54,6 +54,10 @@ var update_mesh := submit_request
 ## bring the editor to a crawl.
 @export
 var sample_space := AABB(Vector3.ONE * -20.0, Vector3.ONE * 40.0)
+
+## If true, applies a shader over the created mesh to make the SDF shapes exact.
+@export
+var exact_raymarching := false
 
 var _sdf_samples := PackedFloat32Array()
 var _vertices := PackedVector3Array()
@@ -198,6 +202,7 @@ func _gather_samples(request: int) -> void:
 		_transforms.append(Vector4(inv_transform.basis.x.x, inv_transform.basis.x.y, inv_transform.basis.x.z, 0.0))
 		_transforms.append(Vector4(inv_transform.basis.y.x, inv_transform.basis.y.y, inv_transform.basis.y.z, 0.0))
 		_transforms.append(Vector4(inv_transform.basis.z.x, inv_transform.basis.z.y, inv_transform.basis.z.z, 0.0))
+		# REMARK: The end not being a number or 1 seems wrong, but it's working atm
 		_transforms.append(Vector4(inv_transform.origin.x, inv_transform.origin.y, inv_transform.origin.z, 0.0))
 		
 		_minimum_scales.append(minf(shape.global_transform.basis.get_scale().x, minf(shape.global_transform.basis.get_scale().y, shape.global_transform.basis.get_scale().z)))
