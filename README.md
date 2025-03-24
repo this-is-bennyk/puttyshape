@@ -36,7 +36,9 @@ I watched [this video by Carter Semrad](https://www.youtube.com/watch?v=QhvzmskR
 PuttyShape requires **at least Godot 4.4**.
 
 ## Installation
-Download the plugin from the latest release and extract the addons/putty_shape folder into your Godot project.
+Either:
+- Install the latest version from the [Asset Library](https://godotengine.org/asset-library/asset/3841).
+- Download the plugin from the latest release and extract the addons/putty_shape folder into your Godot project.
 
 ## License
 This project is licensed under the [MIT License](https://github.com/this-is-bennyk/playnub/blob/main/LICENSE).  
