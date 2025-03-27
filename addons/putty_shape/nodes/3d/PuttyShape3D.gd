@@ -186,6 +186,12 @@ var modifiers: Array[PuttyModifier3D] = []:
 		modifiers = value
 		_update_parent()
 
+@export
+var modulate := Color.WHITE:
+	set(value):
+		modulate = value
+		_update_parent()
+
 @export_group("Combination", "combination_")
 
 ## Tells the parent [PuttyMesher3D] or [PuttyRenderer3D] how to add this shape into the scene.

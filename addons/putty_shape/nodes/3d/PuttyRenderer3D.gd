@@ -130,6 +130,7 @@ func _refresh_scene() -> void:
 		_shape_data.push_back(shape.get_second_arguments())
 		_shape_data.push_back(Vector4(shape.global_transform.basis.get_scale().x, shape.global_transform.basis.get_scale().y, shape.global_transform.basis.get_scale().z, 0.0))
 		_shape_data.push_back(Vector4(float(int(shape.combination_type)), shape.combination_first_radius, shape.combination_second_radius, float(shape.combination_steps)))
+		_shape_data.push_back(Vector4(shape.modulate.r, shape.modulate.g, shape.modulate.b, shape.modulate.a))
 	
 	_update_scene()
 
@@ -154,6 +155,7 @@ func _retrieve_shape_data(shape: PuttyShape3D) -> void:
 	_shape_data[child_index * NUM_SHAPE_DATA_PARAMS + 6] = shape.get_second_arguments()
 	_shape_data[child_index * NUM_SHAPE_DATA_PARAMS + 7] = Vector4(shape.global_transform.basis.get_scale().x, shape.global_transform.basis.get_scale().y, shape.global_transform.basis.get_scale().z, 0.0)
 	_shape_data[child_index * NUM_SHAPE_DATA_PARAMS + 8] = Vector4(float(int(shape.combination_type)), shape.combination_first_radius, shape.combination_second_radius, float(shape.combination_steps))
+	_shape_data[child_index * NUM_SHAPE_DATA_PARAMS + 9] = Vector4(shape.modulate.r, shape.modulate.g, shape.modulate.b, shape.modulate.a)
 
 func _update_scene() -> void:
 	if _shapes.size() <= 0:

@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://chcuof7h0pdkd"
+path="res://.godot/imported/PuttyLUTCreator3D.glsl-54250ef2abf3692b069ee033936277e6.res"
+
+[deps]
+
+source_file="res://addons/putty_shape/shaders/3d/PuttyLUTCreator3D.glsl"
+dest_files=["res://.godot/imported/PuttyLUTCreator3D.glsl-54250ef2abf3692b069ee033936277e6.res"]
+
+[params]
+

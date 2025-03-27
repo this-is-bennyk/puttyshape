@@ -44,21 +44,30 @@ uniform int num_shapes = 0;
 // [6]: Shape data #2
 // [7]: XYZ: Scale
 // [8]: X: Combination type, Y: First radius; Z: Second radius; W: Steps
+// [9]: Color
 uniform sampler2D shape_data;
 
 //uniform sampler2D modification_data;
 
-float putty3D_get_scene(vec3 raycast_position)
+struct Surface
+{
+	float sdf;
+	vec4 color;
+};
+
+Surface putty3D_get_scene(vec3 raycast_position)
 {
 	const float INFINITY = 3.402823466e38;
 	float sdf = INFINITY;
+	//int closest_material_idx = -1;
+	vec4 closest_color = vec4(1.0);
 	
 	ivec2 shape_data_size = textureSize(shape_data, 0);
 
 	#define ZERO int(min(TIME, 0.0)) // Non-constant zero to prevent inlining
 	for (int shape_idx = ZERO; shape_idx < num_shapes; shape_idx++)
 	{
-		int shape_position = shape_idx * 9;
+		int shape_position = shape_idx * 10;
 		vec4 shape_info = texelFetch(shape_data, ivec2((shape_position + 0) % shape_data_size.x, (shape_position + 0) / shape_data_size.x), 0);
 
 		mat4 transform = mat4(
@@ -82,33 +91,38 @@ float putty3D_get_scene(vec3 raycast_position)
 			, shape_data2
 		);
 
+		float prev_sdf = sdf;
+		
 		sdf = putty3D_combine(result, sdf, combo_data);
+		
+		if (result < prev_sdf)
+			closest_color = texelFetch(shape_data, ivec2((shape_position + 9) % shape_data_size.x, (shape_position + 9) / shape_data_size.x), 0);
 	}
 	#undef ZERO
 
-	return sdf;
+	return Surface(sdf, closest_color);
 }
 
-float putty3D_raymarch(vec3 ray_origin, vec3 ray_dir)
+Surface putty3D_raymarch(vec3 ray_origin, vec3 ray_dir)
 {
 	float dist_from_origin = min_distance;
-	float current_dist = 0.0;
+	Surface current_dist_info = Surface(0.0, vec4(1.0));
 
 	#define ZERO int(min(TIME, 0.0)) // Non-constant zero to prevent inlining
 	for (int i = ZERO; i < max_steps; i++)
 	{
 		vec3 raycast_position = ray_origin + ray_dir * dist_from_origin;
 
-		current_dist = putty3D_get_scene(raycast_position);
-		dist_from_origin += current_dist;
+		current_dist_info = putty3D_get_scene(raycast_position);
+		dist_from_origin += current_dist_info.sdf;
 
 		// If we hit a surface or didn't hit anything, break out the loop
-		if (current_dist < surface_distance || dist_from_origin > max_distance)
+		if (current_dist_info.sdf < surface_distance || dist_from_origin > max_distance)
 			break;
 	}
 	#undef ZERO
 
-	return dist_from_origin;
+	return Surface(dist_from_origin, current_dist_info.color);
 }
 
 // From Inigo Quilez on normals
@@ -123,7 +137,7 @@ vec3 putty3D_get_normal(vec3 raycast_position)
 	for (int i = ZERO; i < 4; i++)
 	{
 		vec3 e = 0.5773 * (2.0 * vec3(float(((i + 3) >> 1) & 1), float((i >> 1) & 1), float(i & 1))-1.0);
-		normal += e * putty3D_get_scene(raycast_position + e * NORMAL_EPSILON);
+		normal += e * putty3D_get_scene(raycast_position + e * NORMAL_EPSILON).sdf;
 	}
 	#undef ZERO
 
@@ -138,7 +152,7 @@ float putty3D_get_soft_shadows(vec3 ray_origin, vec3 ray_dir, float light_size_s
 	#define ZERO int(min(TIME, 0.0)) // Non-constant zero to prevent inlining
 	for(int i = ZERO; i < MAX_SHADOW_STEPS && t < max_distance; i++)
 	{
-		float h = putty3D_get_scene(ray_origin + ray_dir * t);
+		float h = putty3D_get_scene(ray_origin + ray_dir * t).sdf;
 
 		result = min(result, h / (light_size_steradians * t));
 		t += clamp(h, 0.005, 0.50);
@@ -173,13 +187,13 @@ void fragment()
 	{
 		vec3 ray_dir = normalize(vert - ray_origin);
 
-		float dist = putty3D_raymarch(ray_origin, ray_dir);
+		Surface surface = putty3D_raymarch(ray_origin, ray_dir);
 
-		if (dist > max_distance)
+		if (surface.sdf > max_distance)
 			discard;
 		else
 		{
-			vec3 raycast_position = ray_origin + ray_dir * dist;
+			vec3 raycast_position = ray_origin + ray_dir * surface.sdf;
 			vec3 normal = putty3D_get_normal(raycast_position);
 			mat3 view_matrix = mat3(VIEW_MATRIX);
 
@@ -196,8 +210,8 @@ void fragment()
 			#else
 			DEPTH = (sdf_ndc.z / sdf_ndc.w);
 			#endif
-
-			ALBEDO = vec3(0.2);
+			
+			ALBEDO = surface.color.rgb;
 		}
 	}
 }
