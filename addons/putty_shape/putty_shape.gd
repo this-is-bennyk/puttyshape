@@ -25,8 +25,8 @@ extends EditorPlugin
 
 
 func _enter_tree() -> void:
-	# Initialization of the plugin goes here.
-	pass
+	var ext := GLTFDocumentExtensionPuttyShape.new()
+	GLTFDocument.register_gltf_document_extension(ext, false)
 
 
 func _exit_tree() -> void:
