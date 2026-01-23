@@ -34,7 +34,19 @@ uniform float surface_distance : hint_range(0.01, 1.0, 0.01) = 0.01;
 
 uniform int num_shapes = 0;
 
-// TODO: 9 texel reads is a lot... anyway to optimize down for a variable number of shapes?
+// TODO: Lots of texel reads... anyway to optimize down for a variable number of shapes?
+// [0]: X: Shape type; Y: # Modifications (unimplemented), Z: Material index (unimplemented)
+// [1]: Affine inverse of global transform X
+// [2]: Affine inverse of global transform Y
+// [3]: Affine inverse of global transform Z
+// [4]: Affine inverse of global transform Origin
+// [5]: Shape data #1
+// [6]: Shape data #2
+// [7]: XYZ: Scale
+// [8]: X: Combination type, Y: First radius; Z: Second radius; W: Steps
+// [9]: Color
+
+// TODO: Lots of texel reads... anyway to optimize down for a variable number of shapes?
 // [0]: X: Shape type; Y: # Modifications (unimplemented), Z: Material index (unimplemented)
 // [1]: Affine inverse of global transform X
 // [2]: Affine inverse of global transform Y

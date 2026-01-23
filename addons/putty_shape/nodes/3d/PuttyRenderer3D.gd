@@ -19,7 +19,7 @@ extends Node3D
 const PUTTY_RAYMARCHER_3D := preload("res://addons/putty_shape/shaders/3d/PuttyRaymarcher3D.gdshader")
 
 const MAX_IMAGE_SIZE_POW2 := 14
-const NUM_SHAPE_DATA_PARAMS := 9
+const NUM_SHAPE_DATA_PARAMS := 10
 const SIZEOF_VECTOR4 := 16
 
 @export_tool_button("Update Cameras", "Camera3D")

@@ -101,6 +101,21 @@ func _ready() -> void:
 func submit_request() -> void:
 	_last_request = Time.get_ticks_usec()
 
+## Immediately creates the mesh based on the current shapes. Only meant for the [GLTFDocumentExtensionPuttyShape]
+## as this function temporarily forces single-threaded computation of the mesh.
+func force_update_mesh() -> void:
+	# Pretend like we're exiting the tree to force the thread to finish
+	_exiting = true
+	_mesh_thread.wait_to_finish()
+	
+	# Create the mesh and grab it to return
+	_create_mesh(0, true)
+	
+	# Restart the thread
+	_exiting = false
+	_last_request = Time.get_ticks_usec()
+	_mesh_thread.start(_mesh_creation_loop)
+
 func _mesh_creation_loop() -> void:
 	var _cur_request := _last_request
 	
@@ -108,7 +123,7 @@ func _mesh_creation_loop() -> void:
 		if _cur_request == _last_request:
 			continue
 		
-		call_thread_safe(&"_create_mesh", _last_request)
+		call_thread_safe(&"_create_mesh", _last_request, false)
 	
 		_cur_request = _last_request
 
@@ -126,7 +141,7 @@ func _get_shapes() -> void:
 		
 		_shapes.push_back(child as PuttyShape3D)
 
-func _create_mesh(request: int) -> void:
+func _create_mesh(request: int, immediate: bool) -> void:
 	_resulting_mesh = null
 	
 	_vertices.clear()
@@ -137,25 +152,37 @@ func _create_mesh(request: int) -> void:
 	if _shapes.size() <= 0:
 		return
 	
-	if request != _last_request:
+	if (not immediate) and request != _last_request:
 		return
 	
-	call_thread_safe(&"_gather_samples", request)
+	if immediate:
+		_gather_samples(request, true)
+	else:
+		call_thread_safe(&"_gather_samples", request, false)
 	
-	if request != _last_request:
+	if (not immediate) and request != _last_request:
 		return
 	
-	call_deferred(&"call_thread_safe", &"_compute_mesh", request)
+	if immediate:
+		_compute_mesh(request, true)
+	else:
+		call_deferred(&"call_thread_safe", &"_compute_mesh", request, false)
 	
-	if request != _last_request:
+	if (not immediate) and request != _last_request:
 		return
 	
-	call_deferred(&"call_deferred", &"call_thread_safe", &"_create_surface_mesh", request)
+	if immediate:
+		_create_surface_mesh(request, true)
+	else:
+		call_deferred(&"call_deferred", &"call_thread_safe", &"_create_surface_mesh", request, false)
 	
-	if request != _last_request:
+	if (not immediate) and request != _last_request:
 		return
 	
-	call_deferred(&"call_deferred", &"call_deferred", &"call_thread_safe", &"_add_mesh")
+	if immediate:
+		_add_mesh()
+	else:
+		call_deferred(&"call_deferred", &"call_deferred", &"call_thread_safe", &"_add_mesh")
 
 func _get_world_space_position(voxel_pos: Vector3i) -> Vector3:
 	return sample_space.position + Vector3(
@@ -189,7 +216,7 @@ func _create_intersection_table() -> void:
 		
 		_edge_table.append(edge_mask)
 
-func _gather_samples(request: int) -> void:
+func _gather_samples(request: int, immediate: bool) -> void:
 	_transforms.clear()
 	_minimum_scales.clear()
 	_shape_types.clear()
@@ -339,8 +366,8 @@ func _gather_samples(request: int) -> void:
 	_rendering_device.free_rid(transforms_buffer)
 	_rendering_device.free_rid(static_params_buffer)
 
-func _create_surface_mesh(request: int) -> void:
-	if _vertices.size() < 3 or request != _last_request:
+func _create_surface_mesh(request: int, immediate: bool) -> void:
+	if _vertices.size() < 3 or ((not immediate) and request != _last_request):
 		return
 	
 	var surface_tool := SurfaceTool.new()
@@ -349,29 +376,30 @@ func _create_surface_mesh(request: int) -> void:
 	for vertex: Vector3 in _vertices:
 		surface_tool.add_vertex(vertex)
 	
-	if request != _last_request:
+	if (not immediate) and request != _last_request:
 		return
 	
 	for vertex_index: int in _triangles:
 		surface_tool.add_index(vertex_index)
 	
-	if request != _last_request:
+	if (not immediate) and request != _last_request:
 		return
 	
 	surface_tool.generate_normals()
 	
-	if request != _last_request:
+	if (not immediate) and request != _last_request:
 		return
 	
 	surface_tool.optimize_indices_for_cache()
 	
-	if request != _last_request:
+	if (not immediate) and request != _last_request:
 		return
 	
 	_resulting_mesh = surface_tool.commit()
 
 func _add_mesh() -> void:
 	if _resulting_mesh == null:
+		mesh = null
 		return
 	
 	var shadow_mesh := _resulting_mesh.duplicate(true) as ArrayMesh
@@ -382,7 +410,7 @@ func _add_mesh() -> void:
 # From Mikola Lysenko's JS implementation of surface nets
 # https://github.com/mikolalysenko/mikolalysenko.github.com/blob/master/Isosurface/js/surfacenets.js
 # Licensed under the MIT License.
-func _compute_mesh(request: int) -> void:
+func _compute_mesh(request: int, immediate: bool) -> void:
 	var buffer := PackedInt64Array()
 	buffer.resize(4096)
 	
@@ -401,7 +429,7 @@ func _compute_mesh(request: int) -> void:
 		
 		for pos_y: int in _dimensions.y - 1:
 			for pos_x: int in _dimensions.x - 1:
-				if request != _last_request:
+				if (not immediate) and request != _last_request:
 					return
 				
 				var pos := Vector3i(pos_x, pos_y, pos_z)
